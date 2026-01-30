@@ -62,6 +62,6 @@ class Practice02 {
             System.out.println(m2.getName() + " " + m2.getRating());
         }
 
-
     }
 }
+    
