@@ -1,3 +1,6 @@
+
+import java.util.*;
+
 interface I{
     public int  add(int i,int j);
 
@@ -15,6 +18,9 @@ class Practice01 {
 
         gov g = (a1,b1) -> {return  (a1*b1)/100; };
         System.out.println(g.gettax(10000,5.6));
+
+        List<Integer>  list = Arrays.asList(1,2,3,4,5);
+        list.forEach(n -> System.out.println(n));
     }
 }
 
