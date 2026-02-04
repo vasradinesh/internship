@@ -5,7 +5,7 @@ import java.util.*;
 class Practice10{
 	public static void main(String args[]){
 		
-		String str = "Programmer";
+		String str = "Programmer are the future";
 		LinkedHashMap<Character, Integer> map = new LinkedHashMap<>();
 		
 		for(int i = 0;i<str.length();i++){
