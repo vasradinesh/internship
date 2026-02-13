@@ -1,0 +1,13 @@
+package com.springboot.project06_oneTOone;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class Project06OneTOoneApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
