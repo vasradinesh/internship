@@ -16,6 +16,6 @@ public class Address {
     @Column(name = "pincode")
     private String pincode;
 
-    @OneToOne(mappedBy = "address")
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "address")
     private Student student;
 }
