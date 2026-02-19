@@ -4,6 +4,8 @@ package com.sprinboot.project10_oneTomany.controller;
 import com.sprinboot.project10_oneTomany.dto.Studentdto;
 import com.sprinboot.project10_oneTomany.service.Studentservcie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,8 +16,9 @@ public class Studentcontroller {
     private Studentservcie studentservcie;
 
     @PostMapping("save-Students")
-    public String saveStudents(@RequestBody Studentdto studentdto) {
-        return studentservcie.saveStudents(studentdto);
+    public ResponseEntity<String> saveStudents(@RequestBody Studentdto studentdto) {
+        String msg =  studentservcie.saveStudents(studentdto);
+        return new ResponseEntity<>(msg, HttpStatus.CREATED);
     }
 
     @GetMapping("get-all-student")

@@ -1,5 +1,6 @@
 package com.sprinboot.project10_oneTomany.service.serviceimpl;
 
+import com.sprinboot.project10_oneTomany.customexception.NoStudentFoundException;
 import com.sprinboot.project10_oneTomany.domain.Address;
 import com.sprinboot.project10_oneTomany.domain.Student;
 import com.sprinboot.project10_oneTomany.dto.Addressdto;
@@ -8,6 +9,7 @@ import com.sprinboot.project10_oneTomany.repository.Studentrepo;
 import com.sprinboot.project10_oneTomany.service.Addressservice;
 import com.sprinboot.project10_oneTomany.utility.Modelutility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class Addressimpl implements Addressservice {
         if(byId.isPresent()){
             return modelutility.addressEntityToDto(byId.get());
         }
-        return new Addressdto();
+        throw new NoStudentFoundException("there is no student of given id ",HttpStatus.NOT_FOUND.value());
     }
 
     @Override
@@ -49,13 +51,16 @@ public class Addressimpl implements Addressservice {
             addressrepo.deleteById(id);
             return "deleted";
         }
-        return "there is no such id exist";
+        throw new NoStudentFoundException("there is no student of given id ",HttpStatus.NOT_FOUND.value());
     }
 
     @Override
     public String DeleteAllAddress() {
+        if(addressrepo.findAll().isEmpty()){
+            throw new NoStudentFoundException("there is no student in database", HttpStatus.NOT_FOUND.value());
+        }
         addressrepo.deleteAll();
-        return "all address deleted";
+        return "deleted";
     }
 
     @Override
@@ -65,11 +70,14 @@ public class Addressimpl implements Addressservice {
             addressrepo.save(modelutility.addressDtotoEntity(addressdto));
             return "updated";
         }
-        return "there is no such id Exist";
+        throw new NoStudentFoundException("there is no student of given id ",HttpStatus.NOT_FOUND.value());
     }
 
     @Override
     public List<Addressdto> getAlladdress() {
+        if(addressrepo.findAll().isEmpty()){
+            throw new NoStudentFoundException("there is no student in database", HttpStatus.NOT_FOUND.value());
+        }
         return modelutility.listAddressEntityToDto(addressrepo.findAll());
     }
 }

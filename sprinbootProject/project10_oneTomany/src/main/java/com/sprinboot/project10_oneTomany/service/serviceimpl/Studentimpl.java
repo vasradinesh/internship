@@ -1,5 +1,6 @@
 package com.sprinboot.project10_oneTomany.service.serviceimpl;
 
+import com.sprinboot.project10_oneTomany.customexception.NoStudentFoundException;
 import com.sprinboot.project10_oneTomany.domain.Student;
 import com.sprinboot.project10_oneTomany.dto.Studentdto;
 import com.sprinboot.project10_oneTomany.repository.Addressrepo;
@@ -8,6 +9,7 @@ import com.sprinboot.project10_oneTomany.service.Studentservcie;
 import com.sprinboot.project10_oneTomany.utility.Modelutility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.task.TaskExecutionProperties;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +35,9 @@ public class Studentimpl implements Studentservcie {
 
     @Override
     public List<Studentdto> getAllStudent() {
+        if(studentrepo.findAll().isEmpty()){
+            throw new NoStudentFoundException("there is no student in database", HttpStatus.NOT_FOUND.value());
+        }
         return modelutility.listStudentEntityToDto(studentrepo.findAll());
     }
 
@@ -42,7 +47,7 @@ public class Studentimpl implements Studentservcie {
         if(byId.isPresent()){
             return modelutility.studentEntityToDto(byId.get());
         }
-        return new Studentdto();
+        throw new NoStudentFoundException("there is no student of given id ",HttpStatus.NOT_FOUND.value());
     }
 
     @Override
@@ -52,11 +57,14 @@ public class Studentimpl implements Studentservcie {
             studentrepo.deleteById(id);
             return "deleted";
         }
-        return "there is no such id exist";
+        throw new NoStudentFoundException("there is no student of given id ",HttpStatus.NOT_FOUND.value());
     }
 
     @Override
     public String deleteAllStudents() {
+        if(studentrepo.findAll().isEmpty()){
+            throw new NoStudentFoundException("there is no student in database", HttpStatus.NOT_FOUND.value());
+        }
         studentrepo.deleteAll();
         return "all student deleted";
     }
@@ -69,6 +77,6 @@ public class Studentimpl implements Studentservcie {
             studentrepo.save(modelutility.studentDtoTOEntity(studentdto));
             return "updated";
         }
-        return "there is no such id exist";
+        throw new NoStudentFoundException("there is no student of given id ",HttpStatus.NOT_FOUND.value());
     }
 }

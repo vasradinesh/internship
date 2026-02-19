@@ -3,6 +3,9 @@ package com.sprinboot.project10_oneTomany.controller;
 import com.sprinboot.project10_oneTomany.dto.Addressdto;
 import com.sprinboot.project10_oneTomany.service.Addressservice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +18,9 @@ public class Addresscontroller {
 
 
     @PostMapping("save-address")
-    public String saveAddress(@RequestBody Addressdto addressdto){
-        return addressservice.saveAddress(addressdto);
+    public ResponseEntity<String> saveAddress(@RequestBody Addressdto addressdto){
+        String msg = addressservice.saveAddress(addressdto);
+        return new ResponseEntity<>(msg, HttpStatus.CREATED);
     }
 
     @GetMapping("get-address-by-id/{id}")
