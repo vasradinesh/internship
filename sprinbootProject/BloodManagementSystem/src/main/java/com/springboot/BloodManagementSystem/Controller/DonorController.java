@@ -6,6 +6,7 @@ import com.springboot.BloodManagementSystem.Proxy.DonationProxy;
 import com.springboot.BloodManagementSystem.Proxy.DonorDetailsProxy;
 import com.springboot.BloodManagementSystem.Repository.DonorDetailsrepo;
 import com.springboot.BloodManagementSystem.Service.DonorDetailsService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class DonorController {
     }
 
     @PostMapping("save-or-update-donor")
-    public ResponseEntity<String> saveOrUpdateDonor(@RequestBody DonorDetailsProxy donorDetailsProxy){
+    public ResponseEntity<String> saveOrUpdateDonor(@Valid @RequestBody DonorDetailsProxy donorDetailsProxy){
         return new ResponseEntity<>(donorDetailsService.saveOrUpdateDonor(donorDetailsProxy),HttpStatus.OK);
     }
 
@@ -42,7 +43,8 @@ public class DonorController {
     }
 
     @PostMapping("donate")
-    public ResponseEntity<String> donateBlood(@RequestBody DonationProxy donationProxy){
+    public ResponseEntity<String> donateBlood(@Valid @RequestBody DonationProxy donationProxy){
+        donationProxy.setRemarks("unchecked blood");
         return new ResponseEntity<>(donorDetailsService.donateBlood(donationProxy),HttpStatus.OK);
     }
 

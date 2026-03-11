@@ -1,10 +1,8 @@
 package com.springboot.BloodManagementSystem.Controller;
 
 
-import com.springboot.BloodManagementSystem.Proxy.BloodStockProxy;
 import com.springboot.BloodManagementSystem.Proxy.DonorDetailsProxy;
 import com.springboot.BloodManagementSystem.Proxy.HospitalProxy;
-import com.springboot.BloodManagementSystem.Repository.BloodStockrepo;
 import com.springboot.BloodManagementSystem.Service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

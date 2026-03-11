@@ -1,5 +1,6 @@
 package com.springboot.BloodManagementSystem.Service.Serviceimpl;
 
+import com.springboot.BloodManagementSystem.CustomException.NoUserFoundException;
 import com.springboot.BloodManagementSystem.Domain.Donation;
 import com.springboot.BloodManagementSystem.Domain.DonorDetails;
 import com.springboot.BloodManagementSystem.Domain.Users;
@@ -11,6 +12,7 @@ import com.springboot.BloodManagementSystem.Repository.Userrepo;
 import com.springboot.BloodManagementSystem.Service.DonorDetailsService;
 import com.springboot.BloodManagementSystem.Utility.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -40,7 +42,7 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
         if(donorDetails.isPresent()){
             return mapper.mapper(donorDetails.get(),DonorDetailsProxy.class);
         }else {
-            throw new RuntimeException("no donor");
+            throw new NoUserFoundException("no donor found of given id", HttpStatus.NOT_FOUND.toString());
         }
     }
 
@@ -50,7 +52,7 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
 
         Long userId = donorDetailsProxy.getUser().getId();
 
-        Users user = userrepo.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        Users user = userrepo.findById(userId).orElseThrow(() -> new NoUserFoundException("User not found of given id : " + userId,HttpStatus.NOT_FOUND.toString()));
 
         Optional<DonorDetails> byUser = donorDetailsrepo.findByUser(user);
 
@@ -78,7 +80,7 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
         donationProxy.setDonationDate(LocalDateTime.now());
 
         Long id = donationProxy.getDonorDetails().getId();
-        DonorDetails donorDetails = donorDetailsrepo.findById(id).orElseThrow(() -> new RuntimeException("there is no Donor"));
+        DonorDetails donorDetails = donorDetailsrepo.findById(id).orElseThrow(() -> new NoUserFoundException("there is no Donor found ",HttpStatus.NOT_FOUND.toString()));
         Donation donation = mapper.mapper(donationProxy, Donation.class);
         donation.setDonorDetails(donorDetails);
         return donationrepo.save(donation).toString();

@@ -37,7 +37,7 @@ public class MyUserDetailsService implements UserDetailsService {
                     .authorities(simpleGrantedAuthorities)
                     .build();
         }else {
-            throw new RuntimeException("faahhh");
+            throw new RuntimeException("no user found of given email " + email);
         }
 
     }

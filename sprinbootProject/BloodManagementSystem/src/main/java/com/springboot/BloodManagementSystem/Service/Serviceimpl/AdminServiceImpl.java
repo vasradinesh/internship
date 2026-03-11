@@ -1,16 +1,20 @@
 package com.springboot.BloodManagementSystem.Service.Serviceimpl;
 
+import com.springboot.BloodManagementSystem.CustomException.NoUserFoundException;
+import com.springboot.BloodManagementSystem.Domain.BloodRequest;
 import com.springboot.BloodManagementSystem.Domain.BloodStock;
 import com.springboot.BloodManagementSystem.Domain.Donation;
 import com.springboot.BloodManagementSystem.Domain.Users;
 import com.springboot.BloodManagementSystem.Proxy.BloodStockProxy;
 import com.springboot.BloodManagementSystem.Proxy.UsersProxy;
+import com.springboot.BloodManagementSystem.Repository.BloodRequestrepo;
 import com.springboot.BloodManagementSystem.Repository.BloodStockrepo;
 import com.springboot.BloodManagementSystem.Repository.Donationrepo;
 import com.springboot.BloodManagementSystem.Repository.Userrepo;
 import com.springboot.BloodManagementSystem.Service.AdminService;
 import com.springboot.BloodManagementSystem.Utility.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,16 +37,20 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private Donationrepo donationrepo;
 
+    @Autowired
+    private BloodRequestrepo bloodRequestrepo;
+
 
     @Override
     public List<UsersProxy> getAllUsers() {
 
-        List<Users> all = userrepo.findAll();
-        if (!all.isEmpty()){
-            return all.stream().map(m->mapper.mapper(m,UsersProxy.class)).toList();
+        List<Users> usersList = userrepo.findAll();
+        if (!usersList.isEmpty()){
+            return usersList.stream().map(m->mapper.mapper(m,UsersProxy.class)).toList();
         }else {
-            throw new RuntimeException("no users");
+            throw new NoUserFoundException("there is no users ",HttpStatus.NOT_FOUND.toString());
         }
+
     }
 
     @Override
@@ -51,7 +59,7 @@ public class AdminServiceImpl implements AdminService {
         if (user.isPresent()){
             return mapper.mapper(user.get(),UsersProxy.class);
         }else {
-            throw new RuntimeException("no user");
+            throw new NoUserFoundException("there is no user of given email", HttpStatus.NOT_FOUND.toString());
         }
     }
 
@@ -62,7 +70,7 @@ public class AdminServiceImpl implements AdminService {
             Donation donation = byId.get();
 
             if(Objects.equals(donation.getRemarks(), "approved")){
-                return "already approved";
+                throw new RuntimeException("donation is already approved");
             }
 
             donation.setRemarks("approved");
@@ -88,8 +96,9 @@ public class AdminServiceImpl implements AdminService {
                 bloodStockrepo.save(bloodStockProxy);
                 return "new blood donation is added";
             }
+
         }
-        return "there is no donor of such id ";
+        throw new NoUserFoundException("there is no donor of such id "+ id,HttpStatus.NOT_FOUND.toString());
     }
 
 
@@ -108,6 +117,50 @@ public class AdminServiceImpl implements AdminService {
             bloodStockProxy.setLastUpdated(LocalDateTime.now());
             bloodStockrepo.save(mapper.mapper(bloodStockProxy,BloodStock.class));
             return "new blood group entry is created";
+        }
+    }
+
+    @Override
+    public String bloodRequestapprover(Long id) {
+        Optional<BloodRequest> bloodRequest = bloodRequestrepo.findById(id);
+        if (bloodRequest.isPresent()){
+
+            BloodRequest bloodRequest1 = bloodRequest.get();
+
+            if(bloodRequest1.getStatus().equals("approved")){
+                throw new RuntimeException("request is already approved");
+            }
+
+            String requestBloodGroup = bloodRequest1.getBloodGroup();
+            Double bloodReqQuantity = bloodRequest1.getQuantity();
+
+
+            Optional<BloodStock> stockOptional = bloodStockrepo.findByBloodGroup(requestBloodGroup);
+
+            if(stockOptional.isPresent()){
+                BloodStock bloodStock = stockOptional.get();
+                Double unitsAvailable = bloodStock.getUnitsAvailable();
+
+                if(unitsAvailable >= bloodReqQuantity){
+                    Double newUnitsAvailable = unitsAvailable - bloodReqQuantity;
+
+                    bloodStock.setLastUpdated(LocalDateTime.now());
+                    bloodStock.setUnitsAvailable(newUnitsAvailable);
+                    bloodStock.setBloodGroup(requestBloodGroup);
+                    bloodStock.setId(bloodStock.getId());
+                    bloodStockrepo.save(bloodStock);
+
+                    bloodRequest1.setStatus("approved");
+                    bloodRequestrepo.save(bloodRequest1);
+                    return "request approved";
+                }else {
+                    throw new RuntimeException("blood stock have less quantity than your request quantity");
+                }
+            }else {
+                throw new RuntimeException("there is no stock for your blood group");
+            }
+        }else {
+            throw new RuntimeException("there is no request exist for your given id");
         }
     }
 }

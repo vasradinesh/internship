@@ -28,22 +28,16 @@ public class SecurityConfig {
 
         return httpSecurity.csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth-> auth
-                        .requestMatchers("/auth/register","/auth/login"
-                                ,"/auth/forget-password/**","/auth/verifyotp","/auth/resetPassword","/hospital/request").permitAll()
-
-
-                        .requestMatchers("/admin/users","/admin/getUserByEmail/**"
-                                ,"/admin/donor/**","/admin/blood-stock/add").hasRole("ADMIN")
+                        .requestMatchers("/auth/register","/auth/login","/auth/forget-password/**","/auth/verifyotp","/auth/resetPassword","/admin/bloodstockreport/download","/admin/blood/requestdata/download").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/donor/**").hasRole("DONOR")
                         .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers("/hospital/**").hasRole("HOSPITAL")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthfilter, UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement(s->s
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
-//                .formLogin(Customizer.withDefaults())
                 .build();
     }
 

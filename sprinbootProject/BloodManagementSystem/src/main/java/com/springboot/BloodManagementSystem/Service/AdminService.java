@@ -15,4 +15,6 @@ public interface AdminService {
 
     String bloodStockAddOrUpdate(BloodStockProxy bloodStockProxy);
 
+    String bloodRequestapprover(Long id);
+
 }

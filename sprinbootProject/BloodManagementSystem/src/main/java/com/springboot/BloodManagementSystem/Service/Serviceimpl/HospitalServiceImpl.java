@@ -1,5 +1,6 @@
 package com.springboot.BloodManagementSystem.Service.Serviceimpl;
 
+import com.springboot.BloodManagementSystem.CustomException.NoUserFoundException;
 import com.springboot.BloodManagementSystem.Domain.BloodRequest;
 import com.springboot.BloodManagementSystem.Domain.Hospital;
 import com.springboot.BloodManagementSystem.Domain.Users;
@@ -12,8 +13,10 @@ import com.springboot.BloodManagementSystem.Repository.Userrepo;
 import com.springboot.BloodManagementSystem.Service.HospitalService;
 import com.springboot.BloodManagementSystem.Utility.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -46,7 +49,7 @@ public class HospitalServiceImpl implements HospitalService {
 
             return hospitalProxy.toString();
         }
-        throw new RuntimeException("no user of given id");
+        throw new NoUserFoundException("no user of given id of user : " + id, HttpStatus.NOT_FOUND.toString());
     }
 
     @Override
@@ -56,13 +59,18 @@ public class HospitalServiceImpl implements HospitalService {
 
         if(byId.isPresent()){
             Hospital hospital = byId.get();
-            HospitalProxy mapper1 = mapper.mapper(hospital, HospitalProxy.class);
+            BloodRequest mapper1 = mapper.mapper(bloodRequestProxy, BloodRequest.class);
+            mapper1.setHospital(hospital);
 
-            bloodRequestProxy.setHospital(mapper1);
-
-            bloodRequestrepo.save(mapper.mapper(bloodRequestProxy, BloodRequest.class));
+            bloodRequestrepo.save(mapper1);
             return "created";
         }
-        return "there is no hosptal of given id";
+        throw new NoUserFoundException("there is no hosptal of given id : " + hospitalid,HttpStatus.NOT_FOUND.toString());
+    }
+
+    @Override
+    public List<BloodRequestProxy> getBloodRequestHistory() {
+        return bloodRequestrepo.findAll().stream()
+                .map(m->mapper.mapper(m,BloodRequestProxy.class)).toList();
     }
 }

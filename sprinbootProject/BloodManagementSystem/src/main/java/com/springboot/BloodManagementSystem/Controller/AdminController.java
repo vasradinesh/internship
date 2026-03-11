@@ -4,12 +4,17 @@ package com.springboot.BloodManagementSystem.Controller;
 import com.springboot.BloodManagementSystem.Proxy.BloodStockProxy;
 import com.springboot.BloodManagementSystem.Proxy.UsersProxy;
 import com.springboot.BloodManagementSystem.Service.AdminService;
+import com.springboot.BloodManagementSystem.Service.ExcelService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/admin")
@@ -17,6 +22,9 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private ExcelService excelService;
 
     @GetMapping("/users")
     public ResponseEntity<List<UsersProxy>> getAllUsers(){
@@ -39,8 +47,41 @@ public class AdminController {
 
 
     @PostMapping("/blood-stock/add")
-    public ResponseEntity<String> bloodStockAdd(@RequestBody BloodStockProxy bloodStockProxy){
+    public ResponseEntity<String> bloodStockAdd(@Valid @RequestBody BloodStockProxy bloodStockProxy){
         return new ResponseEntity<>(adminService.bloodStockAddOrUpdate(bloodStockProxy),HttpStatus.ACCEPTED);
+    }
+
+
+    @GetMapping("/bloodrequest/approve/{id}")
+    public ResponseEntity<String> bloodRequestApprove(@PathVariable Long id){
+        return new ResponseEntity<>(adminService.bloodRequestapprover(id),HttpStatus.OK);
+    }
+
+
+    @GetMapping("bloodstockreport/download")
+    public ResponseEntity<byte[]> downloadExcelFile(){
+        byte[] bytes = excelService.downloadExcelFile();
+        String path = "bloodstockreport__"+ UUID.randomUUID().toString()+".xlsx";
+
+        System.out.println(path);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename="+path)
+                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                .body(bytes);
+    }
+
+    @GetMapping("blood/requestdata/download")
+    public ResponseEntity<byte[]> downloadBloodRequestExcel(){
+        byte[] bytes = excelService.getBloodRequestExcel();
+        String path = "requestdata__"+ UUID.randomUUID().toString()+".xlsx";
+
+        System.out.println(path);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename="+path)
+                .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
+                .body(bytes);
     }
 
 }
