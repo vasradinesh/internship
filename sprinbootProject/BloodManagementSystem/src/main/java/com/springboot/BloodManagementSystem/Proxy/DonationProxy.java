@@ -1,6 +1,7 @@
 package com.springboot.BloodManagementSystem.Proxy;
 
 import com.springboot.BloodManagementSystem.Domain.DonorDetails;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class DonationProxy {
     private LocalDateTime donationDate;
 
     @Positive(message = "enter positive quentity")
+    @Min(value = 1, message = "quantity must greater than 0")
     private Double quantity;
     private String remarks;
 

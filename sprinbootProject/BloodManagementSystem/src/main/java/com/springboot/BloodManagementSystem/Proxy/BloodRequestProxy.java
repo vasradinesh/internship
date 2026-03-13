@@ -1,6 +1,7 @@
 package com.springboot.BloodManagementSystem.Proxy;
 
 import com.springboot.BloodManagementSystem.Domain.Hospital;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ public class BloodRequestProxy {
     private String bloodGroup;
 
     @Positive(message = "enter positive quantity")
+    @Min(value = 1 ,message = "quantity must be grater than 0 ")
     private Double quantity;
     private LocalDateTime requestDate;
     private String status;

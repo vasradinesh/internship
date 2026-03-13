@@ -17,4 +17,6 @@ public interface AdminService {
 
     String bloodRequestapprover(Long id);
 
+    String updateUserByEmail(String email,UsersProxy usersProxy);
+
 }

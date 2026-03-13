@@ -28,7 +28,7 @@ public class SecurityConfig {
 
         return httpSecurity.csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(auth-> auth
-                        .requestMatchers("/auth/register","/auth/login","/auth/forget-password/**","/auth/verifyotp","/auth/resetPassword","/admin/bloodstockreport/download","/admin/blood/requestdata/download").permitAll()
+                        .requestMatchers("/auth/**","/admin/bloodstockreport/download","/admin/blood/requestdata/download").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/donor/**").hasRole("DONOR")
                         .requestMatchers("/user/**").hasRole("USER")

@@ -1,5 +1,6 @@
 package com.springboot.BloodManagementSystem.Service.Serviceimpl;
 
+import com.springboot.BloodManagementSystem.CustomException.NoBloodFoundException;
 import com.springboot.BloodManagementSystem.CustomException.NoUserFoundException;
 import com.springboot.BloodManagementSystem.Domain.BloodRequest;
 import com.springboot.BloodManagementSystem.Domain.BloodStock;
@@ -154,13 +155,27 @@ public class AdminServiceImpl implements AdminService {
                     bloodRequestrepo.save(bloodRequest1);
                     return "request approved";
                 }else {
-                    throw new RuntimeException("blood stock have less quantity than your request quantity");
+                    throw new NoBloodFoundException("blood stock have less quantity than your request quantity",HttpStatus.BAD_REQUEST.toString());
                 }
             }else {
-                throw new RuntimeException("there is no stock for your blood group");
+                throw new NoBloodFoundException("there is no stock for your blood group",HttpStatus.NOT_FOUND.toString());
             }
         }else {
             throw new RuntimeException("there is no request exist for your given id");
+        }
+    }
+
+    @Override
+    public String updateUserByEmail(String email,UsersProxy usersProxy) {
+        Optional<Users> user = userrepo.findByEmail(email);
+        if(user.isPresent()){
+            Users users = user.get();
+            usersProxy.setId(users.getId());
+            usersProxy.setPassword(users.getPassword());
+            userrepo.save(mapper.mapper(usersProxy,Users.class));
+            return "user updated";
+        }else {
+            throw new NoUserFoundException("there is no user of given email : " + email, HttpStatus.NOT_FOUND.toString());
         }
     }
 }

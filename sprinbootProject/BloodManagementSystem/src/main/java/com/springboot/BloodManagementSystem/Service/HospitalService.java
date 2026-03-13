@@ -1,5 +1,6 @@
 package com.springboot.BloodManagementSystem.Service;
 
+import com.springboot.BloodManagementSystem.Model.BloodRequestHistory;
 import com.springboot.BloodManagementSystem.Proxy.BloodRequestProxy;
 import com.springboot.BloodManagementSystem.Proxy.HospitalProxy;
 
@@ -11,6 +12,6 @@ public interface HospitalService {
 
     String bloodRequest(BloodRequestProxy bloodRequestProxy);
 
-    List<BloodRequestProxy> getBloodRequestHistory();
+    List<BloodRequestHistory> getBloodRequestHistory();
 
 }

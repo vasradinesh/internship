@@ -28,13 +28,13 @@ public class AdminController {
 
     @GetMapping("/users")
     public ResponseEntity<List<UsersProxy>> getAllUsers(){
-        return new ResponseEntity<>(adminService.getAllUsers(), HttpStatus.FOUND);
+        return new ResponseEntity<>(adminService.getAllUsers(), HttpStatus.OK);
     }
 
 
     @GetMapping("getUserByEmail/{email}")
     public ResponseEntity<UsersProxy> getUserById(@PathVariable String email){
-        return new ResponseEntity<>(adminService.getUsersByEmail(email),HttpStatus.FOUND);
+        return new ResponseEntity<>(adminService.getUsersByEmail(email),HttpStatus.OK);
     }
 
 
@@ -82,6 +82,12 @@ public class AdminController {
                 .header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename="+path)
                 .contentType(MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
                 .body(bytes);
+    }
+
+
+    @PostMapping("update-user-by-email/{email}")
+    public ResponseEntity<String> updateUserByEmail(@PathVariable String email, @RequestBody UsersProxy usersProxy){
+        return new ResponseEntity<>(adminService.updateUserByEmail(email,usersProxy),HttpStatus.OK);
     }
 
 }

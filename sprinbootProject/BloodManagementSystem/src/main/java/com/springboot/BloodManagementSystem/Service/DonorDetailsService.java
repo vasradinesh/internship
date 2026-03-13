@@ -1,5 +1,6 @@
 package com.springboot.BloodManagementSystem.Service;
 
+import com.springboot.BloodManagementSystem.Model.DonoationDetailsHistory;
 import com.springboot.BloodManagementSystem.Proxy.DonationProxy;
 import com.springboot.BloodManagementSystem.Proxy.DonorDetailsProxy;
 
@@ -11,7 +12,7 @@ public interface DonorDetailsService {
 
     String saveOrUpdateDonor(DonorDetailsProxy donorDetailsProxy);
 
-    List<DonationProxy> getDonorHistory();
+    List<DonoationDetailsHistory> getDonorHistory();
 
     String donateBlood(DonationProxy donationProxy);
 

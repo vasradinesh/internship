@@ -4,6 +4,7 @@ import com.springboot.BloodManagementSystem.CustomException.NoUserFoundException
 import com.springboot.BloodManagementSystem.Domain.Donation;
 import com.springboot.BloodManagementSystem.Domain.DonorDetails;
 import com.springboot.BloodManagementSystem.Domain.Users;
+import com.springboot.BloodManagementSystem.Model.DonoationDetailsHistory;
 import com.springboot.BloodManagementSystem.Proxy.DonationProxy;
 import com.springboot.BloodManagementSystem.Proxy.DonorDetailsProxy;
 import com.springboot.BloodManagementSystem.Repository.Donationrepo;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,14 +66,29 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
             donorDetailsrepo.save(donorDetails);
             return "updated";
         }
-
+        if(!user.getRole().equals("ROLE_DONOR")) {
+            throw new RuntimeException("given user id role is not DONOR so can't do donation");
+        }
         donorDetailsrepo.save(donorDetails);
         return "saved";
+
+
     }
 
     @Override
-    public List<DonationProxy> getDonorHistory() {
-        return donationrepo.findAll().stream().map(m->mapper.mapper(m,DonationProxy.class)).toList();
+    public List<DonoationDetailsHistory> getDonorHistory() {
+        List<DonationProxy> list = donationrepo.findAll().stream().
+                map(m -> mapper.mapper(m, DonationProxy.class)).toList();
+
+        List<DonoationDetailsHistory> donorDetailsHistories = new ArrayList<>();
+
+        for (DonationProxy d : list){
+            donorDetailsHistories
+                    .add(new DonoationDetailsHistory(d.getId(), d.getDonationDate(),d.getQuantity(),d.getRemarks()));
+        }
+
+        return donorDetailsHistories;
+
     }
 
     @Override

@@ -49,6 +49,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String register(UsersProxy usersProxy) {
         Optional<Users> byEmail = userrepo.findByEmail(usersProxy.getEmail());
+        usersProxy.setStatus("INACTIVE");
         if(byEmail.isEmpty()){
             userrepo.save(mapper.mapper(usersProxy,Users.class));
         }else {
@@ -72,6 +73,13 @@ public class AuthServiceImpl implements AuthService {
             UserDetails userDetails = myUserDetailsService.loadUserByUsername(authReq.getEmail());
 
             String jwttoken = jwtUtil.generateToken(userDetails);
+
+            Optional<Users> user = userrepo.findByEmail(authReq.getEmail());
+            Users users = user.get();
+            users.setId(users.getId());
+            users.setStatus("Active");
+            userrepo.save(users);
+
 
             return AuthResp.builder().email(authReq.getEmail())
                     .token(jwttoken).build();

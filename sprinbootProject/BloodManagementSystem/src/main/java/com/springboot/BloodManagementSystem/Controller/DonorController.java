@@ -1,18 +1,14 @@
 package com.springboot.BloodManagementSystem.Controller;
 
 
-import com.springboot.BloodManagementSystem.Domain.DonorDetails;
+import com.springboot.BloodManagementSystem.Model.DonoationDetailsHistory;
 import com.springboot.BloodManagementSystem.Proxy.DonationProxy;
 import com.springboot.BloodManagementSystem.Proxy.DonorDetailsProxy;
-import com.springboot.BloodManagementSystem.Repository.DonorDetailsrepo;
 import com.springboot.BloodManagementSystem.Service.DonorDetailsService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +24,7 @@ public class DonorController {
 
     @GetMapping("get-donor-by-id/{id}")
     public ResponseEntity<DonorDetailsProxy> getDonorDetailsById(@PathVariable Long id){
-        return new ResponseEntity<>(donorDetailsService.getDonorDetailsById(id), HttpStatus.FOUND);
+        return new ResponseEntity<>(donorDetailsService.getDonorDetailsById(id), HttpStatus.OK);
     }
 
     @PostMapping("save-or-update-donor")
@@ -38,8 +34,8 @@ public class DonorController {
 
 
     @GetMapping("get-donor-history")
-    public ResponseEntity<List<DonationProxy>> getDonorHistory(){
-        return new ResponseEntity<>(donorDetailsService.getDonorHistory(),HttpStatus.FOUND);
+    public ResponseEntity<List<DonoationDetailsHistory>> getDonorHistory(){
+        return new ResponseEntity<>(donorDetailsService.getDonorHistory(),HttpStatus.OK);
     }
 
     @PostMapping("donate")

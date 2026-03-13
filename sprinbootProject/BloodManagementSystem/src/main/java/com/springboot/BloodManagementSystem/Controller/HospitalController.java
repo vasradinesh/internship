@@ -1,6 +1,7 @@
 package com.springboot.BloodManagementSystem.Controller;
 
 
+import com.springboot.BloodManagementSystem.Model.BloodRequestHistory;
 import com.springboot.BloodManagementSystem.Proxy.BloodRequestProxy;
 import com.springboot.BloodManagementSystem.Proxy.HospitalProxy;
 import com.springboot.BloodManagementSystem.Service.HospitalService;
@@ -34,8 +35,8 @@ public class HospitalController {
 
 
     @GetMapping("bloodrequest/history")
-    public ResponseEntity<List<BloodRequestProxy>> bloodRequestHistory(){
-        return new ResponseEntity<>(hospitalService.getBloodRequestHistory(),HttpStatus.FOUND);
+    public ResponseEntity<List<BloodRequestHistory>> bloodRequestHistory(){
+        return new ResponseEntity<>(hospitalService.getBloodRequestHistory(),HttpStatus.OK);
     }
 
 
