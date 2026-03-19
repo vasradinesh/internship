@@ -61,7 +61,11 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
     @Override
     public String saveDonor(DonorDetailsProxy donorDetailsProxy,String token) {
 
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",token,Boolean.class)){
+        TokenRole tokenRole = new TokenRole();
+        tokenRole.setToken(token);
+        tokenRole.setRole("ROLE_DONOR");
+
+        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
             throw new RuntimeException("token is not valid");
         }
 
@@ -92,7 +96,11 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
     @Override
     public List<DonoationDetailsHistory> getDonorHistory(String token) {
 
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",token,Boolean.class)){
+        TokenRole tokenRole = new TokenRole();
+        tokenRole.setToken(token);
+        tokenRole.setRole("ROLE_DONOR");
+
+        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
             throw new RuntimeException("token is not valid");
         }
 
@@ -113,7 +121,11 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
     @Override
     public String donateBlood(DonationProxy donationProxy,String token) {
 
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",token,Boolean.class)){
+        TokenRole tokenRole = new TokenRole();
+        tokenRole.setToken(token);
+        tokenRole.setRole("ROLE_DONOR");
+
+        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
             throw new RuntimeException("token is not valid");
         }
 

@@ -3,10 +3,7 @@ package com.bloodmangement.serviceAdmin.Service.Serviceimpl;
 import com.bloodmangement.serviceAdmin.CustomException.NoBloodFoundException;
 import com.bloodmangement.serviceAdmin.CustomException.NoUserFoundException;
 import com.bloodmangement.serviceAdmin.Domain.BloodStock;
-import com.bloodmangement.serviceAdmin.Proxy.BloodRequestProxy;
-import com.bloodmangement.serviceAdmin.Proxy.BloodStockProxy;
-import com.bloodmangement.serviceAdmin.Proxy.DonationProxy;
-import com.bloodmangement.serviceAdmin.Proxy.UsersProxy;
+import com.bloodmangement.serviceAdmin.Proxy.*;
 import com.bloodmangement.serviceAdmin.Repository.BloodStockrepo;
 import com.bloodmangement.serviceAdmin.Service.AdminService;
 import com.bloodmangement.serviceAdmin.Utility.Mapper;
@@ -41,7 +38,15 @@ public class AdminServiceImpl implements AdminService {
 
 
     @Override
-    public List<UsersProxy> getAllUsers() {
+    public List<UsersProxy> getAllUsers(String token) {
+
+        TokenRole tokenRole = new TokenRole();
+        tokenRole.setToken(token);
+        tokenRole.setRole("ROLE_ADMIN");
+
+        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
+            throw new RuntimeException("token is not valid");
+        }
 
         List<UsersProxy> usersList = restTemplate.exchange(
                 "http://localhost:9090/gateway/auth/get-all-users",
@@ -73,7 +78,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public String donorApprover(Long id,String token) {
 
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",token,Boolean.class)){
+        TokenRole tokenRole = new TokenRole();
+        tokenRole.setToken(token);
+        tokenRole.setRole("ROLE_ADMIN");
+
+        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
             throw new RuntimeException("token is not valid");
         }
 
@@ -119,7 +128,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public String bloodStockAddOrUpdate(BloodStockProxy bloodStockProxy,String token) {
 
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",token,Boolean.class)){
+        TokenRole tokenRole = new TokenRole();
+        tokenRole.setToken(token);
+        tokenRole.setRole("ROLE_ADMIN");
+
+        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
             throw new RuntimeException("token is not valid");
         }
 
@@ -153,7 +166,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public String bloodRequestapprover(Long id,String token) {
 
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",token,Boolean.class)){
+        TokenRole tokenRole = new TokenRole();
+        tokenRole.setToken(token);
+        tokenRole.setRole("ROLE_ADMIN");
+
+
+        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
             throw new RuntimeException("token is not valid");
         }
 

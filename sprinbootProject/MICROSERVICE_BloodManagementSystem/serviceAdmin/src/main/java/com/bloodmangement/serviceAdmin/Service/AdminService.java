@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AdminService {
 
-    List<UsersProxy> getAllUsers();
+    List<UsersProxy> getAllUsers(String token);
 //
 //    UsersProxy getUsersByEmail(String email);
 //

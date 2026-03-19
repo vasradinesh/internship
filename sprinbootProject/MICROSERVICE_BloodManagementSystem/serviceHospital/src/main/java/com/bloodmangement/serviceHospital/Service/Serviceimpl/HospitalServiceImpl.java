@@ -4,6 +4,7 @@ import com.bloodmangement.serviceHospital.CustomException.NoUserFoundException;
 import com.bloodmangement.serviceHospital.Domain.BloodRequest;
 import com.bloodmangement.serviceHospital.Domain.Hospital;
 import com.bloodmangement.serviceHospital.Model.BloodRequestHistory;
+import com.bloodmangement.serviceHospital.Model.TokenRole;
 import com.bloodmangement.serviceHospital.Proxy.BloodRequestProxy;
 import com.bloodmangement.serviceHospital.Proxy.BloodStockProxy;
 import com.bloodmangement.serviceHospital.Proxy.HospitalProxy;
@@ -36,12 +37,19 @@ public class HospitalServiceImpl implements HospitalService {
     @Autowired
     private BloodRequestrepo bloodRequestrepo;
 
-//    @Autowired
-//    private BloodStockrepo bloodStockrepo;
 
 
     @Override
-    public String saveHospital(HospitalProxy hospitalProxy) {
+    public String saveHospital(HospitalProxy hospitalProxy,String token) {
+
+        TokenRole tokenRole = new TokenRole();
+        tokenRole.setToken(token);
+        tokenRole.setRole("ROLE_HOSPITAL");
+
+        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
+            throw new RuntimeException("token is not valid");
+        }
+
 
         Long id = hospitalProxy.getUserid();
 
@@ -59,7 +67,16 @@ public class HospitalServiceImpl implements HospitalService {
     }
 
     @Override
-    public String bloodRequest(BloodRequestProxy bloodRequestProxy) {
+    public String bloodRequest(BloodRequestProxy bloodRequestProxy,String token) {
+
+        TokenRole tokenRole = new TokenRole();
+        tokenRole.setToken(token);
+        tokenRole.setRole("ROLE_HOSPITAL");
+
+        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
+            throw new RuntimeException("token is not valid");
+        }
+
         Long hospitalid = bloodRequestProxy.getHospital().getId();
         Optional<Hospital> byId = hospitalrepo.findById(hospitalid);
 
@@ -84,8 +101,18 @@ public class HospitalServiceImpl implements HospitalService {
         throw new NoUserFoundException("there is no hosptal of given id : " + hospitalid,HttpStatus.NOT_FOUND.toString());
     }
 
+
     @Override
-    public List<BloodRequestHistory> getBloodRequestHistory() {
+    public List<BloodRequestHistory> getBloodRequestHistory(String token) {
+
+        TokenRole tokenRole = new TokenRole();
+        tokenRole.setToken(token);
+        tokenRole.setRole("ROLE_HOSPITAL");
+
+        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
+            throw new RuntimeException("token is not valid");
+        }
+
         List<BloodRequestProxy> list = bloodRequestrepo.findAll().stream()
                 .map(m -> mapper.mapper(m, BloodRequestProxy.class)).toList();
 
@@ -97,6 +124,7 @@ public class HospitalServiceImpl implements HospitalService {
         }
         return bloodRequestHistories;
     }
+
 
     @Override
     public BloodRequestProxy getBloodRequest(Long id) {

@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface HospitalService {
 
-    String saveHospital(HospitalProxy hospitalProxy);
+    String saveHospital(HospitalProxy hospitalProxy,String token);
 
-    String bloodRequest(BloodRequestProxy bloodRequestProxy);
+    String bloodRequest(BloodRequestProxy bloodRequestProxy,String token);
 
-    List<BloodRequestHistory> getBloodRequestHistory();
+    List<BloodRequestHistory> getBloodRequestHistory(String token);
 
     BloodRequestProxy getBloodRequest(Long id);
 

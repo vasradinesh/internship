@@ -4,6 +4,7 @@ import com.bloodmangement.serviceHospital.Model.BloodRequestHistory;
 import com.bloodmangement.serviceHospital.Proxy.BloodRequestProxy;
 import com.bloodmangement.serviceHospital.Proxy.HospitalProxy;
 import com.bloodmangement.serviceHospital.Service.HospitalService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,15 +22,18 @@ public class HospitalController {
     private HospitalService hospitalService;
 
     @PostMapping("/save-hospital")
-    public ResponseEntity<String> saveHospital(@Valid @RequestBody HospitalProxy hospitalProxy){
-        return new ResponseEntity<>(hospitalService.saveHospital(hospitalProxy), HttpStatus.CREATED);
+    public ResponseEntity<String> saveHospital(@Valid @RequestBody HospitalProxy hospitalProxy, HttpServletRequest request){
+        String authtoken = request.getHeader("Authorization");
+
+        return new ResponseEntity<>(hospitalService.saveHospital(hospitalProxy,authtoken), HttpStatus.CREATED);
     }
 
     @PostMapping("/blood-request")
-    public ResponseEntity<String> bloodRequest(@Valid @RequestBody BloodRequestProxy bloodRequestProxy){
+    public ResponseEntity<String> bloodRequest(@Valid @RequestBody BloodRequestProxy bloodRequestProxy,HttpServletRequest request){
+        String authtoken = request.getHeader("Authorization");
         bloodRequestProxy.setRequestDate(LocalDateTime.now());
         bloodRequestProxy.setStatus("pending");
-        return new ResponseEntity<>(hospitalService.bloodRequest(bloodRequestProxy),HttpStatus.OK);
+        return new ResponseEntity<>(hospitalService.bloodRequest(bloodRequestProxy,authtoken),HttpStatus.OK);
     }
 
         @PostMapping("set-approved")
@@ -41,8 +45,9 @@ public class HospitalController {
 
 
     @GetMapping("bloodrequest/history")
-    public ResponseEntity<List<BloodRequestHistory>> bloodRequestHistory(){
-        return new ResponseEntity<>(hospitalService.getBloodRequestHistory(),HttpStatus.OK);
+    public ResponseEntity<List<BloodRequestHistory>> bloodRequestHistory(HttpServletRequest request){
+        String authtoken = request.getHeader("Authorization");
+        return new ResponseEntity<>(hospitalService.getBloodRequestHistory(authtoken),HttpStatus.OK);
     }
 
     @GetMapping("get-bloodrequest/{id}")

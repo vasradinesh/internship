@@ -43,11 +43,9 @@ public class AdminController {
 
 
     @GetMapping("/users")
-    public ResponseEntity<List<UsersProxy>> getAllUsers(){
-
-
-
-        return new ResponseEntity<>(adminService.getAllUsers(), HttpStatus.OK);
+    public ResponseEntity<List<UsersProxy>> getAllUsers(HttpServletRequest request){
+        String authtoken = request.getHeader("Authorization");
+        return new ResponseEntity<>(adminService.getAllUsers(authtoken), HttpStatus.OK);
     }
 
 
