@@ -1,0 +1,71 @@
+.login-container {
+  width: 340px;
+  padding: 50px;
+
+  /* background: #ffffff; */
+    border-radius: 14px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+
+  /* text-align: center; */
+  /* animation: fadeIn 0.4s ease-in-out; */
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #1976d2;
+}
+
+/* Inputs */
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  transition: 0.3s;
+}
+
+.login-container input:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 6px rgba(25,118,210,0.3);
+  outline: none;
+}
+
+/* Button */
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+
+  background: linear-gradient(135deg, #1976d2, #0d47a1);
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-container button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #0d47a1, #1976d2);
+}
+
+/* Animation */
+/* @keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} */
