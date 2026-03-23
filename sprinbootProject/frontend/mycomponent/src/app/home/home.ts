@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +8,24 @@ import { Component } from '@angular/core';
 })
 export class Home {
 
-  // keyUpHandler(event : KeyboardEvent){
-  //   console.log(`USER is typing ${event.key}  key`)
-  // }
+  value = signal(0);
+
+  increment(){
+    this.value.set(this.value() +1);
+    this.value.update((val) => val +1);
+  }
+
+  decrement(){
+    this.value.set(this.value() -1);
+    this.value.update((val) => val -1);
+  }
+  reset(){
+    this.value.set(0);
+    // this.value.update();
+  }
+
+  keyUpHandler(event : KeyboardEvent){
+    console.log(`USER is typing ${event.key}  key`)
+  }
 
 }

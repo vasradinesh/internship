@@ -3,14 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { Home } from './home/home';
-import { Todos } from './todos/todos';
+import { PropertyBinding } from './property-binding/property-binding';
+import { ClassBinding } from './class-binding/class-binding';
 
 @NgModule({
   declarations: [
     App,
-    Home,
-    Todos
+    PropertyBinding,
+    ClassBinding
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,13 @@
+.myfontcolorstyle{
+    color: brown;
+    size: 15px;
+    text-transform: capitalize;
+}
+
+.myfonttype{
+
+    font-family: 'Courier New', Courier, monospace;
+    font: small;
+    text-transform: uppercase;
+
+}

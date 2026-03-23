@@ -42,13 +42,13 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
     @Override
     public DonorDetailsProxy getDonorDetailsById(Long id,String token) {
 
-        TokenRole tokenRole = new TokenRole();
-        tokenRole.setToken(token);
-        tokenRole.setRole("ROLE_DONOR");
+//        TokenRole tokenRole = new TokenRole();
+//        tokenRole.setToken(token);
+//        tokenRole.setRole("ROLE_DONOR");
 
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
-            throw new RuntimeException("token is not valid");
-        }
+//        if(!restTemplate.postForObject("http://localhost:9090/auth/verify-token",tokenRole,Boolean.class)){
+//            throw new RuntimeException("token is not valid");
+//        }
 
         Optional<DonorDetails> donorDetails = donorDetailsrepo.findById(id);
         if(donorDetails.isPresent()){
@@ -61,17 +61,17 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
     @Override
     public String saveDonor(DonorDetailsProxy donorDetailsProxy,String token) {
 
-        TokenRole tokenRole = new TokenRole();
-        tokenRole.setToken(token);
-        tokenRole.setRole("ROLE_DONOR");
-
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
-            throw new RuntimeException("token is not valid");
-        }
+//        TokenRole tokenRole = new TokenRole();
+//        tokenRole.setToken(token);
+//        tokenRole.setRole("ROLE_DONOR");
+//
+//        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
+//            throw new RuntimeException("token is not valid");
+//        }
 
         donorDetailsProxy.setLastDonationDate(LocalDateTime.now());
 
-        Users user = restTemplate.getForObject("http://localhost:9090/gateway/auth/get-user/" + donorDetailsProxy.getUserid(), Users.class);
+        Users user = restTemplate.getForObject("http://localhost:9090/auth/get-user/" + donorDetailsProxy.getUserid(), Users.class);
 
         Optional<DonorDetails> byUser = donorDetailsrepo.findByUserid(user.getId());
 
@@ -95,14 +95,14 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
 
     @Override
     public List<DonoationDetailsHistory> getDonorHistory(String token) {
-
-        TokenRole tokenRole = new TokenRole();
-        tokenRole.setToken(token);
-        tokenRole.setRole("ROLE_DONOR");
-
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
-            throw new RuntimeException("token is not valid");
-        }
+//
+//        TokenRole tokenRole = new TokenRole();
+//        tokenRole.setToken(token);
+//        tokenRole.setRole("ROLE_DONOR");
+//
+//        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
+//            throw new RuntimeException("token is not valid");
+//        }
 
         List<DonationProxy> list = donationrepo.findAll().stream().
                 map(m -> mapper.mapper(m, DonationProxy.class)).toList();
@@ -121,13 +121,13 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
     @Override
     public String donateBlood(DonationProxy donationProxy,String token) {
 
-        TokenRole tokenRole = new TokenRole();
-        tokenRole.setToken(token);
-        tokenRole.setRole("ROLE_DONOR");
-
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
-            throw new RuntimeException("token is not valid");
-        }
+//        TokenRole tokenRole = new TokenRole();
+//        tokenRole.setToken(token);
+//        tokenRole.setRole("ROLE_DONOR");
+//
+//        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
+//            throw new RuntimeException("token is not valid");
+//        }
 
         donationProxy.setDonationDate(LocalDateTime.now());
 
