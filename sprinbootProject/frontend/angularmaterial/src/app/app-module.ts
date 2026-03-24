@@ -3,24 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { PropertyBinding } from './property-binding/property-binding';
-import { ClassBinding } from './class-binding/class-binding';
-import { Stylebinding } from './stylebinding/stylebinding';
-import { Twowaybinding } from './twowaybinding/twowaybinding';
-import { FormsModule } from '@angular/forms';
-
+import { AngularMaterialUse } from './angular-material-use/angular-material-use';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     App,
-    PropertyBinding,
-    ClassBinding,
-    Stylebinding,
-    Twowaybinding
+    AngularMaterialUse
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    MatMenuModule,
+    MatButtonModule,
+    MatTabsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

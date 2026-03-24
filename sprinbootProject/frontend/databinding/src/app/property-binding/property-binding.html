@@ -1,5 +1,15 @@
-<h1>property-binding works!</h1>
+<div class="container">
 
-<input type="text" name="fullname" placeholder="full name"  value="dinesh" [disabled]="value" >
-<br>
-<input type="text" name="fullname" placeholder="full name"  value="dinesh" [disabled]="readOnly()" >
+  <h1>property-binding works!</h1>
+
+  <div class="card">
+    <h3>1. Static Property Binding</h3>
+    <input type="text" name="fullname" placeholder="full name" value="dinesh" [disabled]="value">
+  </div>
+
+  <div class="card">
+    <h3>2. Dynamic Property Binding</h3>
+    <input type="text" name="fullname" placeholder="full name" value="dinesh" [disabled]="readOnly()">
+  </div>
+
+</div>

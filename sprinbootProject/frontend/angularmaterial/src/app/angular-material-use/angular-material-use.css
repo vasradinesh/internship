@@ -1,0 +1,31 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    border : 2px solid black;
+    width: fit-content;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.example-small-box, .example-large-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.example-small-box {
+  border : 2px solid rgb(252, 0, 0);
+  height: auto;
+  width: auto;
+}
+
+.example-large-box {
+    border : 2px solid black; 
+  height: 300px;
+  width: 300px;
+}

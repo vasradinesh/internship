@@ -1,0 +1,18 @@
+<hr>
+<div class="container">
+
+  <h1>stylebinding works!</h1>
+
+  <div class="card">
+    <h3>1. Static style Binding</h3>
+    <h4 style="background-color: greenyellow; font-size: large;" >style binding by attribute</h4>
+    <h4 [style]="'background-color: greenyellow; font-size: large;'" >style binding by dom properties</h4>
+  </div>
+
+  <div class="card">
+    <h3>2. dynamic style Binding</h3>
+    <h4 [style]="style" >style binding by variable in typescript</h4>
+    <h4 [ngStyle]="style2" >style binding by [ngstyle]</h4>
+  </div>
+
+</div>

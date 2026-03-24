@@ -7,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrl: './class-binding.css',
 })
 export class ClassBinding {
+  mystyleclass ='myfontcolorstyle myfonttype';
+  condition = false;
+  myfontcolor = "myfontcolorstyle";
+  fonttype = "myfonttype"
+  stylesheet = new Mystylesheet();
+}
 
+
+class Mystylesheet{
+  myfontcolorstyle= false;
+  myfonttype = true;
+  divbody = true;
 }

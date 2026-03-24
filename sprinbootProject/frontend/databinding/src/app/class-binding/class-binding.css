@@ -1,13 +1,53 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+
+}
+
+h1 {
+  font-size: 35px;
+  text-align: center;
+  color: black; 
+  margin-bottom: 20px;
+}
+
+.divbody{
+  background-color: chartreuse;
+  border : 2px solid black;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  width: 100%;      
+  padding: 20px;
+  margin: 10px 2px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px black;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+h4 {
+  margin: 8px 0;
+}
+
 .myfontcolorstyle{
     color: brown;
-    size: 15px;
+    font-size: 15px;
     text-transform: capitalize;
 }
 
 .myfonttype{
-
     font-family: 'Courier New', Courier, monospace;
-    font: small;
     text-transform: uppercase;
-
 }

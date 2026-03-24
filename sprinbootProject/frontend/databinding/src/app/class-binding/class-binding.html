@@ -1,9 +1,68 @@
-<h1>class-binding works!</h1>
+<hr>
 
+<div class="container">
 
-<h4 class="myfontcolorstyle" >this for myfontcolorstyle</h4>
-<h4 class="myfonttype" >this for myfonttype</h4>
+  <h1>class-binding works!</h1>
 
-<h3 class="myfontcolorstyle myfonttype">here is both class is applied </h3>
+  <div class="card">
 
-<h3 [className]="'myfonttype myfontcolorstyle' ">using dom [classname] propearty</h3>
+    <h2>1. Static Class Example</h2>
+    <h4 class="myfontcolorstyle">this for myfontcolorstyle</h4>
+    <h4 class="myfonttype">this for myfonttype</h4>
+    <h4 class="myfontcolorstyle myfonttype">
+      here is both class is applied
+    </h4>
+
+  </div>
+
+  <div class="card">
+
+    <h2>2. Class Binding (Static)</h2>
+    <h4 [className]="'myfonttype myfontcolorstyle'">
+      class binding with [classname] in static way
+    </h4>
+
+  </div>
+
+  <div class="card">
+
+    <h2>3. Class Binding (Dynamic)</h2>
+    <h4 [className]="mystyleclass">
+      class binding with [classname] in dynamic way (typescript)
+    </h4>
+
+  </div>
+
+  <div class="card">
+
+    <h2>4. Conditional Class Binding</h2>
+    <h4 [class]="condition?'myfonttype':'myfontcolorstyle'">
+      class binding with class and ternary operation in dynamic way (typescript)
+    </h4>
+
+  </div>
+
+  <div class="card">
+
+    <h2>5. [ngClass] Binding (static) </h2>
+    <h4 [ngClass]="'myfonttype'">
+      class binding with [ngclass] 
+    </h4>
+
+  </div>
+
+   <div class="card">
+
+    <h2>5. [ngClass] Binding (dynamic)</h2>
+    <h4 [ngClass]="myfontcolor">
+      class binding with [ngclass] 
+    </h4>
+    <h4 [ngClass]="stylesheet">
+      class binding with [ngclass] by object
+    </h4>
+
+  </div>
+
+  
+
+</div>

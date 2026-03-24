@@ -1,0 +1,12 @@
+<hr>
+<div class="container">
+
+  <h1>twowaybinding works!</h1>
+
+  <div class="card">
+    <h3>1. Two Way Binding by [(ngModel)]</h3>
+    <input type="text" name="fullname" placeholder="enter full name"  [(ngModel)]="myname">
+    <h4 *ngIf="myname!=''" >Full Name : {{myname}}</h4>
+  </div>
+
+</div>

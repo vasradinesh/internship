@@ -1,0 +1,88 @@
+<div class="container">
+    <h1>ngif</h1>
+    <div class="card">
+        <h3>1. *ngIf and else directives</h3>
+        <h4 *ngIf="displaydata; else elsepart">this is for ngif is true </h4>
+        <ng-template #elsepart>
+            <div>
+                <h4 style="color: brown;">this part is elsepart</h4>
+            </div>
+        </ng-template>
+    </div>
+
+    <div class="card">
+        <h3>2. *ngIf then and else directives</h3>
+        <h4 *ngIf="true; then ifpart; else elsepart"></h4>
+        <ng-template #ifpart>
+            <div>
+                <h4 style="color: brown;">this part is ifpart</h4>
+            </div>
+        </ng-template>
+        <ng-template #elsepart>
+            <div>
+                <h4 style="color: brown;">this part is elsepart</h4>
+            </div>
+        </ng-template>
+    </div>
+
+
+    <h1>ngswitch</h1>
+    <div class="card">
+
+        <input type="text" placeholder="programing langauge" name="langauge" [(ngModel)]="langauge">
+
+        <h3>1. [ngSwitch] and *ngSwitchCase</h3>
+        <div [ngSwitch]="langauge">
+            <div *ngSwitchCase="'java'">
+                <p>you enter {{langauge}}</p>
+                <p style="color: rgb(255, 60, 0);">{{langauge}} is found in 1999</p>
+            </div>
+            <div *ngSwitchCase="'python'">
+                <p>you enter {{langauge}}</p>
+                <p style="color: rgb(39, 100, 37);">{{langauge}} is found in 1990</p>
+            </div>
+            <div *ngSwitchCase="'c++'">
+                <p>you enter {{langauge}}</p>
+                <p style="color: rgb(0, 37, 201);">{{langauge}} is found in 1990</p>
+            </div>
+            <div *ngSwitchDefault>
+                <p style="color: rgb(39, 100, 37);">{{langauge}} is not found </p>
+            </div>
+        </div>
+    </div>
+
+
+     <h1>ngFor</h1>
+    <div class="card">
+        <h3>1. *ngFor ="let __ of ___"</h3>
+        <h4 *ngFor="let country of countryname ; index as i;even as ev;first as f;last as l">
+            <h4>{{l}}-{{i+1}} - {{country}}</h4>
+        </h4>
+    </div>
+
+    <h1>bootstrap table with ngFor</h1>
+
+    <table class="table table-striped custom-table border border-primary-subtle rounded-3">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Address</th>
+      <th scope="col">College Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of studentdata ; index as i">
+      <td>{{i+1}}</td>
+      <td>{{s.name}}</td>
+      <td>{{s.age}}</td>
+      <td>{{s.address}}</td>
+      <td><button type="button" name="info" >info</button></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+</div>

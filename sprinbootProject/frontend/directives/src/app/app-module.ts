@@ -3,19 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { PropertyBinding } from './property-binding/property-binding';
-import { ClassBinding } from './class-binding/class-binding';
-import { Stylebinding } from './stylebinding/stylebinding';
-import { Twowaybinding } from './twowaybinding/twowaybinding';
+import { Structuraldirectives } from './structuraldirectives/structuraldirectives';
 import { FormsModule } from '@angular/forms';
-
 @NgModule({
   declarations: [
     App,
-    PropertyBinding,
-    ClassBinding,
-    Stylebinding,
-    Twowaybinding
+    Structuraldirectives
   ],
   imports: [
     BrowserModule,
