@@ -8,6 +8,8 @@ import { ClassBinding } from './class-binding/class-binding';
 import { Stylebinding } from './stylebinding/stylebinding';
 import { Twowaybinding } from './twowaybinding/twowaybinding';
 import { FormsModule } from '@angular/forms';
+import { EventBinding } from './event-binding/event-binding';
+import { TempRefrence } from './temp-refrence/temp-refrence';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { FormsModule } from '@angular/forms';
     PropertyBinding,
     ClassBinding,
     Stylebinding,
-    Twowaybinding
+    Twowaybinding,
+    EventBinding,
+    TempRefrence
   ],
   imports: [
     BrowserModule,

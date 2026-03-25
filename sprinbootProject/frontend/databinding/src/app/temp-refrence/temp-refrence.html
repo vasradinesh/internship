@@ -1,0 +1,15 @@
+<hr>
+<div class="container">
+
+    <h1>temp-refrence works!</h1>
+    <div class="card">
+
+        <input type="text" #fname placeholder="first name" (keypress)="setfullname(fname.value,lname.value)">
+        <input type="text" #lname placeholder="last name name" (keypress)="setfullname(fname.value,lname.value)">
+        <button (click)="setfullname(fname.value,lname.value)"> click</button>
+        <h4>Full Name : {{fullname}}</h4>
+        <h3>1. data from html to typescript</h3>
+        <h2 #headingtitle>hello welcom to jumanji</h2>
+        <button (click)="sawtitle(headingtitle.innerHTML)">title</button>
+    </div>
+</div>
