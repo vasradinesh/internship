@@ -1,0 +1,34 @@
+<h1>Built in pipes-component </h1>
+
+<h4>{{data | uppercase}}</h4>
+<h4>{{data | lowercase}}</h4>
+<h4>{{data | slice:0:8}}</h4>
+<h4>{{data | uppercase}}</h4>
+<h4>{{data | uppercase}}</h4>
+
+<h4>date and time and week day name : {{date}}</h4>
+<h4>data and current year : {{date | date}}</h4>
+<h4>date short {{date | date:'shortDate' }}</h4>
+<h4>date mediumDate {{date | date:'mediumDate' }}</h4>
+<h4>date long {{date | date:'long' }}</h4>
+<h4>date shortTime {{date | date:'shortTime' }}</h4>
+<h4>date mediumTime {{date | date:'mediumTime' }}</h4>
+<h4>date longTime {{date | date:'longTime' }}</h4>
+<h2>{{number | percent}}</h2>
+
+<h2>{{number | number:'3.3-3'}}</h2>
+
+<h2>{{number | currency:'INR'}}</h2>
+<h2>{{number | currency:'INR':'symbol'}}</h2>
+<h2>{{number | currency:'INR':'code'}}</h2>
+
+<h2>{{date|date:'dd-MM-yyyy'}}</h2>
+<h2>{{date|date:'hh-mm-ss a'}}</h2>
+
+<br>
+<hr>
+<br><br>
+
+<h1>Custom  pipes</h1>
+
+<h3>{{5 | power :[1,2]}}</h3>
