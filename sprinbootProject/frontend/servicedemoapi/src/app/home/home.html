@@ -1,0 +1,58 @@
+<p>home works!</p>
+<h1>{{test}}</h1>
+
+<button (click)="getpostsdata()" type="text">posts</button>
+<input type="text" #userid>
+<button (click)="getPostsbyid(userid.value)">userByid</button>
+<button (click)="getcomments()" type="text">posts</button>
+
+<!-- <h1>{{myposts | json}}</h1> -->
+<div class="container">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">userId</th>
+      <th scope="col">id</th>
+      <th scope="col">title</th>
+      <th scope="col">body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let d of myposts" >
+      <th>{{d.userId}}</th>
+      <td>{{d.id}}</td>
+      <td>{{d.title}}</td>
+      <td>{{d.body}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<hr>
+<br><br>
+<h1 style="text-align: center;" >comments</h1>
+<br>
+
+<div class="container">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">postId</th>
+      <th scope="col">id</th>
+      <th scope="col">name</th>
+      <th scope="col">email</th>
+      <th scope="col">body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let d of mycomments" >
+      <th>{{d.postbyid}}</th>
+      <td>{{d.id}}</td>
+      <td>{{d.name}}</td>
+      <td>{{d.email}}</td>
+      <td>{{d.body}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h1>{{postbyid | json}}</h1>
