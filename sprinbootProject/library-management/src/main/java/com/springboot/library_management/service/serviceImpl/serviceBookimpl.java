@@ -16,6 +16,8 @@ public class serviceBookimpl implements serviceBook {
 
     List<Book> bookList = new ArrayList<>();
 
+
+
     @Override
     public String Add_book(Book book) {
         Optional<Book> first = bookList.stream().filter(s -> Objects.equals(s.getBid(), book.getBid())).findFirst();

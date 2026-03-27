@@ -5,6 +5,17 @@ import { email } from '@angular/forms/signals';
   providedIn: 'root',
 })
 export class Dataprovider {
+
+  users = ['dinesh','jetho','bhide']
+
+  constructor(){
+
+  }
+
+  getusers (){
+    return   this.users;
+  }
+
   public studentdata = [
     {
       name : 'dinesh',

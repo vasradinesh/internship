@@ -10,15 +10,19 @@ import { Dataprovider } from '../service/dataprovider';
 })
 export class Student implements OnInit {
 
- 
+  user:string[]=[];
+
+  constructor(private userss:Dataprovider){
+
+  }
 
   data = inject(Dataprovider);
-
+  
   storedata:any;
 
  ngOnInit(): void {
-
   this.storedata = this.data.studentdata
+  this.user = this.userss.getusers();
   }
 
 }
