@@ -1,0 +1,33 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 p-4">
+        <h2>update Book by Bid</h2>
+
+      <input class="input mb-3 mt-3 mr-3" type="number" #bid placeholder="enter bookid" name="id">
+      <button class="btn btn-primary " (click)="getbookbyId(bid.value)" >get book</button>
+
+      <form #myForm="ngForm" (ngSubmit)="updatebookbyId(bid.value,myForm.value)">
+
+        <div class="form-group">
+          <label>Title:</label>
+          <input type="text" class="form-control" name="title" [(ngModel)] = 'book.title'>
+        </div>
+
+        <div class="form-group">
+          <label>Author:</label>
+          <input type="text" class="form-control" name="author" [(ngModel)] = 'book.author'>
+        </div>
+
+        <div class="form-group">
+          <label>Price:</label>
+          <input type="number" class="form-control" name="price" [(ngModel)] = 'book.price'>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary w-100">
+          update
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

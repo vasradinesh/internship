@@ -1,0 +1,54 @@
+<h1 style="text-align: center;" >search books</h1>
+<div class="container">
+  <div class="card">
+    <h1>get - all - books</h1>
+    <button  class="btn btn-primary w-fit rounded-3 fw-bold shadow-sm" (click)="books()">Get All Books</button>
+    <table class="table table-striped">
+      <thead *ngIf="allbooks&& allbooks.length >0" >
+        <tr>
+          <th scope="col">bid</th>
+          <th scope="col">title</th>
+          <th scope="col">auther</th>
+          <th scope="col">price</th>
+          <th scope="col">delete</th>
+          
+        </tr>
+      </thead>
+      <tbody *ngIf="allbooks&& allbooks.length >0" >
+        <tr *ngFor="let d of allbooks">
+          <th>{{d.bid}}</th>
+          <td>{{d.title}}</td>
+          <td>{{d.author}}</td>
+          <td>{{d.price}}</td>
+          <td><button class="btn btn-dark w-100" (click)="deletebyId(d.bid)">delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card p-3">
+    <h1>get book by id</h1>
+    <input class="form-control mb-3" type="text" placeholder="enter Bookid" #Bid >
+    <button  class="btn btn-primary w-fit rounded-3 fw-bold shadow-sm" (click)="getbookbyId(Bid.value)">Get Book by id </button>
+    <table class="table table-striped">
+      <thead  >
+        <tr>
+          <th scope="col">bid</th>
+          <th scope="col">title</th>
+          <th scope="col">auther</th>
+          <th scope="col">price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="book">
+          <th>{{book.bid}}</th>
+          <td>{{book.title}}</td>
+          <td>{{book.author}}</td>
+          <td>{{book.price}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
