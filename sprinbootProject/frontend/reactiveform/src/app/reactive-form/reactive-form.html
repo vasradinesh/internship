@@ -1,0 +1,130 @@
+<div class="container mt-5 ">
+
+    <div class="card shadow p-4 mx-auto" style="max-width: 600px; border-radius: 15px; background: #ffffff;">
+
+        <h2 class="text-center mb-4 text-primary fw-bold">Student Registration</h2>
+
+        <form [formGroup]="myform" (ngSubmit)="savefromdata()">
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Name</label>
+                <input type="text" class="form-control rounded-3 border-primary" name="name"
+                    placeholder="Enter your name" formControlName="name"
+                    [class.is-invalid]="formControl['name'].touched && formControl['name'].invalid">
+            </div>
+            @if (formControl['name'].touched && formControl['name'].invalid) {
+            <div class="alert alert-danger" *ngIf="formControl['name'].touched && formControl['name'].invalid">
+                @if (formControl['name'].errors && formControl['name'].errors['required']) {
+                <div>
+                    enter name
+                </div>
+                }
+            </div>
+            }
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Age</label>
+                <input type="number" class="form-control rounded-3 border-success" name="age"
+                    [class.is-invalid]="formControl['age'].touched && formControl['age'].invalid"
+                    placeholder="Enter your age" formControlName="age">
+            </div>
+            <div class="alert alert-danger" *ngIf="formControl['age'].touched && formControl['age'].invalid">
+                <div *ngIf="formControl['age'].errors && formControl['age'].errors['required']">
+                    age is required
+                </div>
+                <div *ngIf="formControl['age'].errors && formControl['age'].errors['min']">
+                    minimum age is 15
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control rounded-3 border-info" name="email"
+                    placeholder="Enter your email" formControlName="email" [class.is-invalid]="formControl['email'].touched && formControl['email'].invalid">
+            </div>
+            <div class="alert alert-danger" *ngIf="formControl['email'].touched && formControl['email'].invalid">
+                <div *ngIf="formControl['email'].errors && formControl['email'].errors['required']">
+                    email is required
+                </div>
+                <div *ngIf="formControl['email'].errors && formControl['email'].errors['email']">
+                    enter valid email
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Password</label>
+                <input type="password" class="form-control rounded-3 border-warning" name="password" [class.is-invalid]="formControl['password'].touched && formControl['password'].invalid"
+                    placeholder="Enter password" formControlName="password">
+            </div>
+            <div class="alert alert-danger" *ngIf="formControl['password'].touched && formControl['password'].invalid">
+                <div *ngIf="formControl['password'].errors && formControl['password'].errors['required']">
+                    password is required
+                </div>
+                <div *ngIf="formControl['password'].errors && formControl['password'].errors['pattern']">
+                    password must have one capital on extra char and numbers
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label d-block fw-semibold">Gender</label>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input " type="radio" name="gender" value="male" formControlName="gender">
+                    <label class="form-check-label ">Male</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input " type="radio" name="gender" value="female" formControlName="gender">
+                    <label class="form-check-label ">Female</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input " type="radio" name="gender" value="other" formControlName="gender">
+                    <label class="form-check-label ">other</label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">City</label>
+                <select class="form-select rounded-3 border-secondary" name="city" formControlName="city">
+                    <option value="" disabled selected>Select City</option>
+                    <option value="Ahmedabad">Ahmedabad</option>
+                    <option value="Surat">Surat</option>
+                    <option value="Vadodara">Vadodara</option>
+                    <option value="Rajkot">Rajkot</option>
+                </select>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Subjects</label>
+
+                <div class="form-check">
+                    <input class="form-check-input border-primary" name="subject" type="checkbox" value="math"
+                        (change)="onclickoncheckbox($event)">
+                    <label class="form-check-label text-primary">Math</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input border-success" type="checkbox" (change)="onclickoncheckbox($event)"
+                        name="subject" value="science">
+                    <label class="form-check-label text-success">Science</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input border-warning" type="checkbox" name="subject" value="english"
+                        (change)="onclickoncheckbox($event)">
+                    <label class="form-check-label text-warning">English</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn w-100 py-2 fw-bold text-white"
+                style="background: linear-gradient(45deg, #007bff, #6610f2); border-radius: 10px;">
+                Submit
+            </button>
+
+        </form>
+
+    </div>
+</div>
