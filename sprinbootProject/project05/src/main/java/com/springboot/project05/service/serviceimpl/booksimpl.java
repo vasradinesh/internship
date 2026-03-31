@@ -4,10 +4,12 @@ import com.springboot.project05.Repository.Bookrepo;
 import com.springboot.project05.models.Book;
 import com.springboot.project05.service.bookservice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class booksimpl implements bookservice {
 
 
@@ -16,13 +18,7 @@ public class booksimpl implements bookservice {
 
     @Override
     public String Add_book(Book book) {
-        Optional<Book> book1 = bookrepo.findById(book.getBid());
-        if (book1.isPresent()){
-            return "given id's book is already there ";
-        }else {
-            return bookrepo.save(book).toString();
-        }
-
+        return bookrepo.save(book).toString();
     }
     @Override
     public List<Book> Get_all_books() {
@@ -43,6 +39,7 @@ public class booksimpl implements bookservice {
     public String Update_book_By_Id(Long bid, Book book) {
         Optional<Book> book1 = bookrepo.findById(bid);
         if (book1.isPresent()){
+            book.setBid(bid);
             bookrepo.save(book);
             return "updated";
         }else {
@@ -61,12 +58,12 @@ public class booksimpl implements bookservice {
     }
 
     @Override
-    public List<Book> Search_by_title(String title) {
+    public Book Search_by_title(String title) {
        return bookrepo.findByTitle(title);
     }
 
     @Override
-    public List<Book> Search_by_Author(String author) {
+    public Book Search_by_Author(String author) {
         return bookrepo.findByAuthor(author);
     }
 

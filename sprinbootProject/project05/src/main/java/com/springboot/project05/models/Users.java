@@ -12,13 +12,15 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @Entity
-public class Book {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bid;
-    private String title;
-    private String author;
-    private String price;
+    private Long id ;
+    private String name;
+    private String email;
+    private String password;
+
+
 
 }

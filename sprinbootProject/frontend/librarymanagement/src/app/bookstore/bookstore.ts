@@ -61,5 +61,4 @@ export class Bookstore implements OnInit{
     })
   }
 
-
 }

@@ -11,8 +11,8 @@ public interface bookservice {
     public Book Get_book_by_ID(Long bid);
     public String Update_book_By_Id(Long bid ,Book book);
     public String Delete_book_By_Id(Long bid);
-    public List<Book> Search_by_title(String title);
-    public List<Book> Search_by_Author(String author);
+    public Book Search_by_title(String title);
+    public Book Search_by_Author(String author);
     public long Count_books();
     public List<Book> Sort_by_price();
     public String Bulk_add(List<Book> Books);
