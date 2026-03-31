@@ -1,0 +1,178 @@
+<div class="container py-5">
+
+    <div class="card shadow-lg border-0 mx-auto"
+        style="max-width: 100%px; border-radius: 18px; background: linear-gradient(135deg,#f8f9ff,#eef1ff);">
+
+        <div class="card-body p-4">
+
+            <h2 class="text-center mb-4 fw-bold" style="color:#4b49ac;">Student Registration</h2>
+
+            <form [formGroup]="myform" (ngSubmit)="savefromdata()">
+                <div class="row">
+
+                    <!-- Name -->
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <label class="fw-semibold">Name</label>
+                            <input type="text" class="form-control shadow-sm rounded-3" formControlName="name"
+                                [class.is-invalid]="formControl['name'].touched && formControl['name'].invalid">
+                        </div>
+
+                        <div class="text-danger small mb-3"
+                            *ngIf="formControl['name'].touched && formControl['name'].invalid">
+                            Enter name
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <label class="fw-semibold">Age</label>
+                            <input type="number" class="form-control shadow-sm rounded-3" formControlName="age"
+                                [class.is-invalid]="formControl['age'].touched && formControl['age'].invalid">
+                        </div>
+
+                        <div class="text-danger small mb-3"
+                            *ngIf="formControl['age'].touched && formControl['age'].invalid">
+                            <div *ngIf="formControl['age'].errors?.['required']">Age is required</div>
+                            <div *ngIf="formControl['age'].errors?.['min']">Minimum age is 15</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-semibold">Email</label>
+                    <input type="email" class="form-control shadow-sm rounded-3" formControlName="email"
+                        [class.is-invalid]="formControl['email'].touched && formControl['email'].invalid">
+                </div>
+                <div class="text-danger small mb-2"
+                    *ngIf="formControl['email'].touched && formControl['email'].invalid">
+                    <div *ngIf="formControl['email'].errors?.['required']">Email is required</div>
+                    <div *ngIf="formControl['email'].errors?.['email']">Enter valid email</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-semibold">Password</label>
+                    <input type="password" class="form-control shadow-sm rounded-3" formControlName="password"
+                        [class.is-invalid]="formControl['password'].touched && formControl['password'].invalid">
+                </div>
+                <div class="text-danger small mb-2"
+                    *ngIf="formControl['password'].touched && formControl['password'].invalid">
+                    <div *ngIf="formControl['password'].errors?.['required']">Password is required</div>
+                    <div *ngIf="formControl['password'].errors?.['pattern']">
+                        Must contain capital, number & special character
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-semibold d-block mb-2">Gender</label>
+                    <div class="d-flex gap-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="male" formControlName="gender">
+                            <label class="form-check-label">Male</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="female" formControlName="gender">
+                            <label class="form-check-label">Female</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="other" formControlName="gender">
+                            <label class="form-check-label">Other</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-danger small mb-2"
+                    *ngIf="formControl['gender'].touched && formControl['gender'].invalid">
+                    Select gender
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-semibold">City</label>
+                    <select class="form-select shadow-sm rounded-3" formControlName="city"
+                        [class.is-invalid]="formControl['city'].touched && formControl['city'].invalid">
+                        <option value="" disabled>Select City</option>
+                        <option>Ahmedabad</option>
+                        <option>Surat</option>
+                        <option>Vadodara</option>
+                        <option>Rajkot</option>
+                    </select>
+                </div>
+                <div class="text-danger small mb-2" *ngIf="formControl['city'].touched && formControl['city'].invalid">
+                    Select city
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-semibold d-block mb-2">Subjects</label>
+                    <div class="d-flex gap-4">
+                        <div class="form-check">
+                            <input type="checkbox" value="math" class="form-check-input"
+                                (change)="onclickoncheckbox($event)">
+                            <label class="form-check-label">Math</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" value="science" class="form-check-input"
+                                (change)="onclickoncheckbox($event)">
+                            <label class="form-check-label">Science</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" value="english" class="form-check-input"
+                                (change)="onclickoncheckbox($event)">
+                            <label class="form-check-label">English</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-danger small mb-3" *ngIf="myselectsubjects.length==0">
+                    Select at least one subject
+                </div>
+
+                <button class="btn w-100 py-2 fw-bold text-white "
+                    style="border-radius:12px;background:linear-gradient(45deg,#4b49ac,#6f42c1);"
+                    [disabled]="myform.invalid || myselectsubjects.length===0">
+                    Submit
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-5 shadow-lg border-0">
+        <div class="card-body">
+
+            <h3 class="text-center fw-bold mb-3" style="color:#4b49ac;">Student Details</h3>
+
+            <div class="table-responsive">
+                <table class="table table-hover text-center align-middle">
+                    <thead style="background:#4b49ac; color:white;">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Gender</th>
+                            <th>City</th>
+                            <th>Subjects</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let s of std; index as i">
+                            <td class="fw-bold">{{i+1}}</td>
+                            <td class="fw-semibold">{{s.name}}</td>
+                            <td>{{s.age}}</td>
+                            <td>{{s.email}}</td>
+                            <td>{{s.password}}</td>
+                            <td>{{s.gender}}</td>
+                            <td>{{s.city}}</td>
+                            <td>
+                                <span class="badge bg-primary me-1" *ngFor="let sub of s.subjects">{{sub}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
