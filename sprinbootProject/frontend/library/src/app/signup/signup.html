@@ -1,0 +1,96 @@
+<div class="container pt-5">
+
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-5 col-md-7 col-sm-10">
+
+      <div class="card user-card shadow-lg border-0 rounded-4 overflow-hidden">
+
+        <!-- HEADER -->
+        <div class="text-center py-3 header-section">
+          <h3 class="fw-bold mb-1">👤 Create Account</h3>
+          <small class="text-white">Join Library </small>
+        </div>
+
+        <!-- FORM -->
+        <div class="p-4">
+
+          <form #myForm="ngForm" (ngSubmit)="registerUser(myForm.value,myForm)">
+
+            <!-- NAME -->
+            <div class="mb-3">
+              <label class="form-label small">Full Name</label>
+              <input type="text"
+                     class="form-control user-input"
+                     name="name"
+                     ngModel
+                     required
+                     #name="ngModel"
+                     placeholder="Enter your full name">
+
+              <div class="text-danger small mt-1"
+                   *ngIf="name.touched && name.invalid">
+                Name is required
+              </div>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="mb-3">
+              <label class="form-label small">Email Address</label>
+              <input type="email"
+                     class="form-control user-input"
+                     name="email"
+                     ngModel
+                     required
+                     email
+                     #email="ngModel"
+                     placeholder="Enter your email">
+
+              <div class="text-danger small mt-1"
+                   *ngIf="email.touched && email.invalid">
+                Enter valid email
+              </div>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="mb-4">
+              <label class="form-label small">Password</label>
+              <input type="password"
+                     class="form-control user-input"
+                     name="password"
+                     ngModel
+                     required
+                     minlength="4"
+                     #password="ngModel"
+                     placeholder="Enter password">
+
+              <div class="text-danger small mt-1"
+                   *ngIf="password.touched && password.invalid">
+                Minimum 4 characters required
+              </div>
+            </div>
+
+            <!-- BUTTON -->
+            <button type="submit"
+                    class="btn user-btn w-100 fw-bold py-2"
+                    [disabled]="myForm.invalid">
+              🚀 Register
+            </button>
+
+          </form>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="text-center py-2 footer-section">
+          <small>
+            Already have an account?
+            <a routerLink="/login" class="login-link">Login</a>
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

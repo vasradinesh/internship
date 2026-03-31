@@ -1,0 +1,55 @@
+/* CARD */
+.user-card {
+  background: #ffffff;
+  transition: 0.3s;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+}
+
+/* HEADER */
+.header-section {
+  background: #111;
+  color: white;
+}
+
+/* INPUT */
+.user-input {
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+.user-input:focus {
+  border-color: #ff8800;
+  box-shadow: 0 0 0 0.2rem rgba(255,136,0,0.2);
+}
+
+/* BUTTON */
+.user-btn {
+  background: #ff8800;
+  color: white;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.user-btn:hover {
+  background: #e67600;
+}
+
+/* FOOTER */
+.footer-section {
+  background: #f8f9fa;
+}
+
+.login-link {
+  color: #ff8800;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}

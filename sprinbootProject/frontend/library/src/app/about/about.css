@@ -1,0 +1,33 @@
+/* Title */
+.about-title {
+  color: #ff8800;
+}
+
+/* Card */
+.about-card {
+  background: #ffffff;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Feature box */
+.feature-box {
+  padding: 10px;
+  border-left: 3px solid #ff8800;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+/* Dark mode compatibility (if used) */
+body.dark-mode .about-card {
+  background: #1a1a1a;
+  color: white;
+}
+
+body.dark-mode .feature-box {
+  background: #111;
+}

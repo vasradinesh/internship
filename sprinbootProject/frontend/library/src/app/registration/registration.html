@@ -1,0 +1,95 @@
+<div class="container pt-5">
+
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-5 col-md-7 col-sm-10">
+
+      <div class="card user-card shadow-lg border-0 rounded-4 overflow-hidden">
+
+        <!-- HEADER -->
+        <div class="text-center py-3 header-section">
+          <h3 class="fw-bold mb-1">📚 Add Book</h3>
+          <small class="text-white">Manage your library collection</small>
+        </div>
+
+        <!-- FORM -->
+        <div class="p-4">
+
+          <form #myForm="ngForm" (ngSubmit)="saveBook(myForm.value)">
+
+            <!-- TITLE -->
+            <div class="mb-3">
+              <label class="form-label small">Book Title</label>
+              <input type="text"
+                     class="form-control user-input"
+                     name="title"
+                     ngModel
+                     required
+                     #title="ngModel"
+                     placeholder="Enter book title">
+
+              <div class="text-danger small mt-1"
+                   *ngIf="title.touched && title.invalid">
+                Title is required
+              </div>
+            </div>
+
+            <!-- AUTHOR -->
+            <div class="mb-3">
+              <label class="form-label small">Author Name</label>
+              <input type="text"
+                     class="form-control user-input"
+                     name="author"
+                     ngModel
+                     required
+                     #author="ngModel"
+                     placeholder="Enter author name">
+
+              <div class="text-danger small mt-1"
+                   *ngIf="author.touched && author.invalid">
+                Author is required
+              </div>
+            </div>
+
+            <!-- PRICE -->
+            <div class="mb-4">
+              <label class="form-label small">Price</label>
+              <input type="number"
+                     class="form-control user-input"
+                     name="price"
+                     ngModel
+                     required
+                     min="1"
+                     #price="ngModel"
+                     placeholder="Enter price">
+
+              <div class="text-danger small mt-1"
+                   *ngIf="price.touched && price.invalid">
+                Valid price required
+              </div>
+            </div>
+
+            <!-- BUTTON -->
+            <button type="submit"
+                    class="btn user-btn w-100 fw-bold py-2"
+                    [disabled]="myForm.invalid">
+              ➕ Add Book
+            </button>
+
+          </form>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="text-center py-2 footer-section">
+          <small>
+            Want to see books?
+            <a routerLink="/getbooks" class="login-link">View Books</a>
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

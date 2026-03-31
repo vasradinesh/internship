@@ -1,0 +1,78 @@
+/* Navbar base */
+.navbar {
+  background: linear-gradient(135deg, #0d0d0d, #1a1a1a) !important;
+  border-bottom: 3px solid #ff8800 !important;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Brand */
+.navbar-brand {
+  color: #ff8800 !important;
+  font-size: 1.35rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Brand hover */
+.navbar-brand:hover {
+  color: #ffffff !important;
+  transform: scale(1.05);
+}
+
+/* Nav links */
+.nav-link {
+  color: #e0e0e0 !important;
+  font-weight: 500;
+  margin-left: 15px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.nav-link:hover {
+  color: #ff8800 !important;
+  transform: translateY(-2px);
+}
+
+/* Active link */
+.active-link {
+  color: #ff8800 !important;
+  font-weight: 600;
+}
+
+/* Underline animation */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background-color: #ff8800;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Smooth mobile toggle */
+.navbar-toggler {
+  border: none !important;
+  outline: none !important;
+}
+
+/* Mobile menu styling */
+@media (max-width: 991px) {
+  .navbar-nav {
+    margin-top: 10px;
+    background-color: #111;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .nav-link {
+    margin-left: 0;
+    padding: 10px;
+  }
+}

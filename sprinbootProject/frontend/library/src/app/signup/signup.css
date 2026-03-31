@@ -1,0 +1,58 @@
+/* CARD */
+.user-card {
+  background: #fff;
+}
+
+/* HEADER */
+.header-section {
+  background: #111;
+  color: #fff;
+  border-bottom: 3px solid #ff8800;
+}
+
+/* INPUT */
+.user-input {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+.user-input:focus {
+  border-color: #ff8800;
+  box-shadow: 0 0 0 2px rgba(255,136,0,0.2);
+}
+
+/* BUTTON */
+.user-btn {
+  background-color: #ff8800;
+  color: #fff;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+
+.user-btn:hover {
+  background-color: #ffa733;
+}
+
+/* FOOTER */
+.footer-section {
+  background: #fafafa;
+  border-top: 1px solid #eee;
+}
+
+.login-link {
+  color: #ff8800;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  body {
+    padding-top: 90px;
+  }
+}
