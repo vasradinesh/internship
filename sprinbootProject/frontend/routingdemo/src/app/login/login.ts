@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './login.css',
 })
 export class Login {
+
+  
    onLogin(form: any) {
     console.log(form.value);
 

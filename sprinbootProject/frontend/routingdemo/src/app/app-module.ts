@@ -13,6 +13,8 @@ import { Notfound } from './notfound/notfound';
 import { Registration } from './registration/registration';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { Profile } from './profile/profile';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     Home,
     Header,
     Notfound,
-    Registration
+    Registration,
+    Profile
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     RouterLink,
     RouterOutlet,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

@@ -6,6 +6,7 @@ import { Login } from './login/login';
 import { Home } from './home/home';
 import { Notfound } from './notfound/notfound';
 import { Registration } from './registration/registration';
+import { Profile } from './profile/profile';
 
 const routes: Routes = [
   {path:'about',component:About},
@@ -14,7 +15,9 @@ const routes: Routes = [
   {path:'home',component:Home},
   {path:'registration',component:Registration},
   {path:'',redirectTo:'home', pathMatch:'full'},
-  {path:'**',component:Notfound}
+  {path:'profile',component:Profile},
+  {path:'profile/:id',component:Profile},
+  {path:'**',component:Notfound},
 
 
 ];
