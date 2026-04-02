@@ -1,0 +1,64 @@
+/* Navbar Base */
+.custom-navbar {
+  background: linear-gradient(135deg, #2A5C82, #1f4a6b);
+  height: 70px;
+  display: flex;
+  align-items: center;
+  position: fixed;   /* stays on top */
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Logo */
+.logo-icon {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+.logo-text {
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+}
+
+/* Buttons */
+.btn-outline-light {
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.6);
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-outline-light:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+/* Red Button */
+.btn-danger {
+  background: #C91C1C;
+  border: none;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.btn-danger:hover {
+  background: #a31515;
+}
+
+/* Spacing Fix for Mobile */
+@media (max-width: 768px) {
+  .logo-text {
+    font-size: 14px;
+  }
+
+  .custom-navbar {
+    padding: 0 10px;
+  }
+
+  .btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}   

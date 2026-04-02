@@ -1,0 +1,63 @@
+<div class="dashboard-container">
+
+  <!-- HEADER TITLE -->
+  <div class="dashboard-header text-center">
+    <h2>Admin Dashboard</h2>
+    <p>Blood Management System Overview</p>
+  </div>
+
+  <!-- STATS CARDS -->
+  <div class="row g-4 mt-3">
+
+    <div class="col-md-3 col-sm-6">
+      <div class="card stat-card">
+        <h5>Total Users</h5>
+        <h2>{{totalUsers}}</h2>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="card stat-card">
+        <h5>Donors</h5>
+        <h2>{{donors}}</h2>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="card stat-card">
+        <h5>Hospitals</h5>
+        <h2>{{hospitals}}</h2>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <div class="card stat-card">
+        <h5>Blood Units</h5>
+        <h2>{{bloodUnits}}</h2>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ACTION SECTION -->
+  <div class="row mt-5">
+
+    <div class="col-md-6 mb-3">
+      <div class="card action-card">
+        <h5>Manage Users</h5>
+        <p>View and control all registered users</p>
+        <button class="btn btn-danger w-100">View Users</button>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="card action-card">
+        <h5>Blood Stock</h5>
+        <p>Add or update blood inventory</p>
+        <button class="btn btn-outline-danger w-100">Manage Stock</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,119 @@
+/* Fix overlap with header */
+.fix-top-space {
+  padding-top: 90px;
+}
+
+/* Wrapper */
+.login-wrapper {
+  min-height: 100vh;
+  background: #F4F7F9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card */
+.login-card {
+  display: flex;
+  width: 900px;
+  max-width: 95%;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+/* Left Panel */
+.login-left {
+  width: 40%;
+  background: #2A5C82;
+  color: white;
+  padding: 40px;
+  text-align: center;
+}
+
+.login-left h2 {
+  font-weight: bold;
+}
+
+.login-left p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Pulse Animation */
+.pulse-dot {
+  width: 15px;
+  height: 15px;
+  background: #C91C1C;
+  border-radius: 50%;
+  margin: 20px auto;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  70% { transform: scale(1.5); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Right Panel */
+.login-right {
+  width: 60%;
+  padding: 40px;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+.form-control:focus {
+  border-color: #2A5C82;
+  box-shadow: 0 0 6px rgba(42, 92, 130, 0.3);
+}
+
+/* Button */
+.btn-danger {
+  background: #C91C1C;
+  border: none;
+  border-radius: 8px;
+}
+
+.btn-danger:hover {
+  background: #a31515;
+}
+
+/* Links */
+a {
+  color: #C91C1C;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-card {
+    flex-direction: column;
+  }
+
+  .login-left {
+    display: none;
+  }
+
+  .login-right {
+    width: 100%;
+    padding: 25px;
+  }
+}

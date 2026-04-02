@@ -1,0 +1,74 @@
+/* FULL PAGE FIX (HEADER SPACE) */
+.dashboard-container {
+  margin-top: 80px;
+  padding: 20px;
+  background: #F4F7F9;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.dashboard-header h2 {
+  color: #2A5C82;
+  font-weight: 700;
+}
+
+.dashboard-header p {
+  color: #666;
+}
+
+/* STAT CARDS */
+.stat-card {
+  border: none;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card h5 {
+  color: #888;
+}
+
+.stat-card h2 {
+  color: #C91C1C;
+  font-weight: bold;
+}
+
+/* ACTION CARDS */
+.action-card {
+  border-radius: 15px;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.action-card h5 {
+  color: #2A5C82;
+  font-weight: 600;
+}
+
+.action-card p {
+  color: #777;
+}
+
+/* BUTTONS */
+.btn-danger {
+  background-color: #C91C1C;
+  border: none;
+}
+
+.btn-outline-danger {
+  border-color: #C91C1C;
+  color: #C91C1C;
+}
+
+.btn-outline-danger:hover {
+  background-color: #C91C1C;
+  color: white;
+}
