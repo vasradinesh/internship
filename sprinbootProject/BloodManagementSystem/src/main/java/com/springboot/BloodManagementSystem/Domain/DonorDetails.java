@@ -24,7 +24,7 @@ public class DonorDetails {
     private String available;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private Users user;
 

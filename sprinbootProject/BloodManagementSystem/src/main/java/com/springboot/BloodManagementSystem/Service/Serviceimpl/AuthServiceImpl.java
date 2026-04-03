@@ -111,7 +111,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String verifyOtp(String email, String otp) {
         String storageotp = otpStorage.get(email);
-        if(storageotp==null && !storageotp.equals(otp)){
+        if(storageotp==null || !storageotp.equals(otp)){
             throw new RuntimeException("invalid otp");
         }else {
             return "correct otp";

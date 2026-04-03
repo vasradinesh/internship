@@ -27,6 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
 
         return httpSecurity.csrf(csrf->csrf.disable())
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth-> auth
                         .requestMatchers("/auth/**","/admin/bloodstockreport/download","/admin/blood/requestdata/download").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")

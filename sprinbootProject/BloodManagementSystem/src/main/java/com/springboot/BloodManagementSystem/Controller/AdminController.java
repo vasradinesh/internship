@@ -2,6 +2,7 @@ package com.springboot.BloodManagementSystem.Controller;
 
 
 import com.springboot.BloodManagementSystem.Proxy.BloodStockProxy;
+import com.springboot.BloodManagementSystem.Proxy.DonationProxy;
 import com.springboot.BloodManagementSystem.Proxy.UsersProxy;
 import com.springboot.BloodManagementSystem.Service.AdminService;
 import com.springboot.BloodManagementSystem.Service.ExcelService;
@@ -18,6 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/admin")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AdminController {
 
     @Autowired
@@ -43,6 +45,7 @@ public class AdminController {
     public ResponseEntity<String> donorApprover(@PathVariable Long id){
         return new ResponseEntity<>(adminService.donorApprover(id),HttpStatus.ACCEPTED);
     }
+
 
 
 
@@ -88,6 +91,17 @@ public class AdminController {
     @PostMapping("update-user-by-email/{email}")
     public ResponseEntity<String> updateUserByEmail(@PathVariable String email, @RequestBody UsersProxy usersProxy){
         return new ResponseEntity<>(adminService.updateUserByEmail(email,usersProxy),HttpStatus.OK);
+    }
+
+    @DeleteMapping("delete-user-by-email/{email}")
+    public ResponseEntity<String > deletebyemail(@PathVariable String email){
+        System.out.println(email);
+        return new ResponseEntity<>(adminService.deleteuserbyemail(email),HttpStatus.OK);
+    }
+
+    @GetMapping("get-all-donation")
+    public ResponseEntity<List<DonationProxy>> getAlldonation(){
+        return new ResponseEntity<>(adminService.getAllDonation(),HttpStatus.OK);
     }
 
 }

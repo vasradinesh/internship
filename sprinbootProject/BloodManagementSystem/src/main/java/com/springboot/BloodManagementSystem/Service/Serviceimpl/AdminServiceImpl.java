@@ -7,6 +7,7 @@ import com.springboot.BloodManagementSystem.Domain.BloodStock;
 import com.springboot.BloodManagementSystem.Domain.Donation;
 import com.springboot.BloodManagementSystem.Domain.Users;
 import com.springboot.BloodManagementSystem.Proxy.BloodStockProxy;
+import com.springboot.BloodManagementSystem.Proxy.DonationProxy;
 import com.springboot.BloodManagementSystem.Proxy.UsersProxy;
 import com.springboot.BloodManagementSystem.Repository.BloodRequestrepo;
 import com.springboot.BloodManagementSystem.Repository.BloodStockrepo;
@@ -14,7 +15,9 @@ import com.springboot.BloodManagementSystem.Repository.Donationrepo;
 import com.springboot.BloodManagementSystem.Repository.Userrepo;
 import com.springboot.BloodManagementSystem.Service.AdminService;
 import com.springboot.BloodManagementSystem.Utility.Mapper;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -177,5 +180,35 @@ public class AdminServiceImpl implements AdminService {
         }else {
             throw new NoUserFoundException("there is no user of given email : " + email, HttpStatus.NOT_FOUND.toString());
         }
+    }
+
+    @Modifying
+    @Transactional
+    @Override
+    public String deleteuserbyemail(String email) {
+
+        Optional<Users> byEmail = userrepo.findByEmail(email);
+        System.out.println(byEmail);
+
+        if (byEmail.isPresent()){
+            Long id = byEmail.get().getId();
+            System.out.println("before"+id);
+            userrepo.deleteById(id);
+            System.out.println("delete id:"+id);
+            return "deleted";
+        }else {
+            throw new NoUserFoundException("there is no user of given email : " + email, HttpStatus.NOT_FOUND.toString());
+        }
+    }
+
+    @Override
+    public List<DonationProxy> getAllDonation() {
+        List<Donation> usersList = donationrepo.findAll();
+        if (!usersList.isEmpty()){
+            return usersList.stream().map(m->mapper.mapper(m,DonationProxy.class)).toList();
+        }else {
+            throw new NoUserFoundException("there is no users ",HttpStatus.NOT_FOUND.toString());
+        }
+
     }
 }
