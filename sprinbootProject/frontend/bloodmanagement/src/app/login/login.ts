@@ -37,6 +37,8 @@ export class Login {
         // localStorage.setItem('token', res.token);
         // Get role from token
         const role = this.storage.getUserRole();
+        // this.storage.setitem('token', res.token);
+        this.storage.setitem('email', res.email); 
 
         if (!role) {
           alert("Role not found ");

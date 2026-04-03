@@ -1,16 +1,21 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { tap, throwError } from 'rxjs';
+import { Mystorage } from '../service/mystorage';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
    const router = inject(Router);
+   const myStorage = inject(Mystorage)
 
 
   // Skip backend auth APIs
   const skipUrls = [
     '/auth/login',
-    '/auth/register'
+    '/auth/register',
+     '/auth/forget-password',
+  '/auth/verifyotp',
+  '/auth/resetPassword'
   ];
 
   const shouldSkip = skipUrls.some(url => req.url.includes(url));
@@ -23,6 +28,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   console.log('tewetee');
 console.log(token);
+
+if (!token || myStorage.isTokenExpired(token)) {
+      myStorage.removeitem('token');
+      router.navigate(['/login']);
+      return throwError(() => new Error('Token expired. Logging out.'));
+    }
 
   if (token) {
     console.log(token);

@@ -1,0 +1,71 @@
+<div class="donation-container">
+
+  <!-- HEADER -->
+  <div class="donation-header">
+    <h3>🩸 Blood Donations</h3>
+    <p>Track and manage all donor activities</p>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="table-card">
+
+    <table class="custom-table">
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Quantity</th>
+          <th>Blood Group</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let d of donations">
+
+          <td>{{d.id}}</td>
+
+          <td>
+            {{d.donationDate | date:'medium'}}
+          </td>
+
+          <td>
+            <span class="qty-badge">
+              {{d.quantity}} units
+            </span>
+          </td>
+
+          <td>
+            <span class="blood-badge">
+              {{d.donorDetails.bloodGroup}}
+            </span>
+          </td>
+
+          <td>{{d.donorDetails.age}}</td>
+
+          <td class="text-capitalize">
+            {{d.donorDetails.gender}}
+          </td>
+
+          <td>
+            <span 
+              class="status-badge"
+              [ngClass]="{
+                'approved': d.remarks === 'approved',
+                'pending': d.remarks !== 'approved'
+              }">
+              {{d.remarks}}
+            </span>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

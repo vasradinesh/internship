@@ -1,74 +1,253 @@
-/* FULL PAGE FIX (HEADER SPACE) */
 .dashboard-container {
   margin-top: 80px;
   padding: 20px;
-  background: #F4F7F9;
+  background: #eef2f7;
   min-height: 100vh;
 }
 
 /* HEADER */
-.dashboard-header h2 {
-  color: #2A5C82;
-  font-weight: 700;
+.dashboard-header {
+  background: #1f3b57;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
 }
 
-.dashboard-header p {
-  color: #666;
-}
-
-/* STAT CARDS */
-.stat-card {
-  border: none;
-  border-radius: 15px;
-  padding: 20px;
+/* BUTTON */
+.center-btn {
   text-align: center;
-  background: #ffffff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+.load-btn {
+  background: #e63946;
+  color: white;
+  border-radius: 25px;
+}
+
+/* STATS */
+.stat-card {
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.stat-card.total {
+  background: #2c3e50;
+}
+
+.stat-card.donor {
+  background: #27ae60;
+}
+
+.stat-card.hospital {
+  background: #2980b9;
+}
+
+.clickable {
+  cursor: pointer;
   transition: 0.3s;
 }
 
-.stat-card:hover {
-  transform: translateY(-5px);
+.clickable:hover {
+  transform: scale(1.05);
 }
 
-.stat-card h5 {
-  color: #888;
-}
-
-.stat-card h2 {
-  color: #C91C1C;
-  font-weight: bold;
-}
-
-/* ACTION CARDS */
-.action-card {
-  border-radius: 15px;
+/* TABLE */
+.table-card {
+  background: white;
   padding: 20px;
-  background: #ffffff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
 }
 
-.action-card h5 {
-  color: #2A5C82;
-  font-weight: 600;
+.table-title {
+  margin-bottom: 15px;
+  color: #1f3b57;
 }
 
-.action-card p {
-  color: #777;
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table thead {
+  background: #1f3b57;
+  color: white;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 12px;
+  text-align: center;
+}
+
+.custom-table tbody tr:hover {
+  background: #f5f8fc;
+}
+
+/* BADGES */
+.role-badge {
+  background: #ddd;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: white;
+}
+
+.status-badge.active {
+  background: #27ae60;
+}
+
+.status-badge.inactive {
+  background: #e74c3c;
+}
+
+.blood-badge {
+  background: #e63946;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.qty-badge {
+  background: #3498db;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
 }
 
 /* BUTTONS */
-.btn-danger {
-  background-color: #C91C1C;
-  border: none;
-}
-
-.btn-outline-danger {
-  border-color: #C91C1C;
-  color: #C91C1C;
-}
-
-.btn-outline-danger:hover {
-  background-color: #C91C1C;
+.btn-edit {
+  background: #f39c12;
   color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+}
+
+.btn-approve {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.btn-reject {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: white;
+  width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.btn-cancel {
+  background: gray;
+  color: white;
+}
+
+.btn-update {
+  background: #27ae60;
+  color: white;
+}
+
+/* DOWNLOAD SECTION */
+.download-section {
+  margin-top: 20px;
+}
+
+/* PRIMARY DOWNLOAD */
+.btn-download {
+  background: #1E3A8A;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  border: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-download:hover {
+  background: #162c6b;
+}
+
+/* OUTLINE BUTTON */
+.btn-download-outline {
+  background: transparent;
+  border: 2px solid #1E3A8A;
+  color: #1E3A8A;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-download-outline:hover {
+  background: #1E3A8A;
+  color: white;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+
+  display: flex;              /* ✅ ADD THIS */
+  align-items: center;        /* ✅ CENTER */
+  justify-content: center;    /* ✅ CENTER */
+
+  z-index: 9999;              /* ✅ VERY IMPORTANT */
+}
+
+.modal-content {
+  background: white;
+  width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* DELETE BUTTON */
+.btn-delete {
+  background: #dc3545;
+  color: white;
+  border: none;
+  margin-left: 5px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-delete:hover {
+  background: #a71d2a;
 }

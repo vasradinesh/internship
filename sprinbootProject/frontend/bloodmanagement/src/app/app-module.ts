@@ -12,6 +12,13 @@ import { RouterModule } from '@angular/router';
 import { Header } from './header/header';
 import { authInterceptor } from './interceptors/auth-interceptor';
 import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
+import { Home } from './pages/home/home';
+import { ForgotPassword } from './forgot-password/forgot-password';
+import { VerifyOtp } from './verify-otp/verify-otp';
+import { ResetPassword } from './reset-password/reset-password';
+import { AdminUsers } from './pages/admin-users/admin-users';
+import { AdminHospitals } from './pages/admin-hospitals/admin-hospitals';
+import { AdminDonations } from './pages/admin-donations/admin-donations';
 
 
 @NgModule({
@@ -21,7 +28,14 @@ import { AdminDashboard } from './pages/admin-dashboard/admin-dashboard';
     Login,
     Dashboard,
     Header,
-    AdminDashboard
+    AdminDashboard,
+    Home,
+    ForgotPassword,
+    VerifyOtp,
+    ResetPassword,
+    AdminUsers,
+    AdminHospitals,
+    AdminDonations
   ],
   imports: [
     BrowserModule,

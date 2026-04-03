@@ -1,63 +1,205 @@
 <div class="dashboard-container">
 
-  <!-- HEADER TITLE -->
-  <div class="dashboard-header text-center">
-    <h2>Admin Dashboard</h2>
-    <p>Blood Management System Overview</p>
+  <!-- HEADER -->
+  <div class="dashboard-header">
+    <div>
+      <h2>🩸 Admin Dashboard</h2>
+      <p>System Overview & User Management</p>
+    </div>
   </div>
 
-  <!-- STATS CARDS -->
-  <div class="row g-4 mt-3">
+  <!-- LOAD BUTTON -->
+  <div class="center-btn">
+    <button class="btn load-btn px-4" (click)="loadUsers()">
+      Load Users
+    </button>
+  </div>
 
-    <div class="col-md-3 col-sm-6">
-      <div class="card stat-card">
-        <h5>Total Users</h5>
+  <!-- STATS -->
+  <div class="row stats-row" *ngIf="users.length > 0">
+
+    <div class="col-md-4">
+      <div class="stat-card total clickable" (click)="loadUsers()">
+        <h6>Total Users</h6>
         <h2>{{totalUsers}}</h2>
       </div>
     </div>
 
-    <div class="col-md-3 col-sm-6">
-      <div class="card stat-card">
-        <h5>Donors</h5>
+    <div class="col-md-4">
+      <div class="stat-card donor clickable" (click)="loadDonations()">
+        <h6>Donors</h6>
         <h2>{{donors}}</h2>
       </div>
     </div>
 
-    <div class="col-md-3 col-sm-6">
-      <div class="card stat-card">
-        <h5>Hospitals</h5>
+    <div class="col-md-4">
+      <div class="stat-card hospital">
+        <h6>Hospitals</h6>
         <h2>{{hospitals}}</h2>
-      </div>
-    </div>
-
-    <div class="col-md-3 col-sm-6">
-      <div class="card stat-card">
-        <h5>Blood Units</h5>
-        <h2>{{bloodUnits}}</h2>
       </div>
     </div>
 
   </div>
 
-  <!-- ACTION SECTION -->
-  <div class="row mt-5">
+  <div class="download-section mt-4 text-center">
 
-    <div class="col-md-6 mb-3">
-      <div class="card action-card">
-        <h5>Manage Users</h5>
-        <p>View and control all registered users</p>
-        <button class="btn btn-danger w-100">View Users</button>
-      </div>
+    <button class="btn btn-download me-3" (click)="downloadStockExcel()">
+      Download Blood Stock
+    </button>
+
+    <button class="btn btn-download-outline" (click)="downloadRequestExcel()">
+      Download Requests
+    </button>
+
+  </div>
+
+  <!-- USER TABLE -->
+  <div class="table-container mt-4" *ngIf="activeView === 'users'">
+
+    <h4 class="table-title">All Users</h4>
+
+    <table class="custom-table">
+
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let user of users">
+
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+
+          <td>
+            <span class="role-badge">
+              {{user.role}}
+            </span>
+          </td>
+
+          <td>
+            <span class="status-badge" [ngClass]="{
+                'active': user.status === 'Active',
+                'inactive': user.status === 'INACTIVE'
+              }">
+              {{user.status}}
+            </span>
+          </td>
+
+          <td>
+            <button class="btn-edit" (click)="openEdit(user)">
+              Edit
+            </button>
+            <button  class="btn-delete" (click)="deleteUser(user.email)">
+              Delete
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- DONATION TABLE -->
+  <div class="table-container mt-4" *ngIf="activeView === 'donations'">
+
+    <h4 class="table-title">Donation Records</h4>
+
+    <table class="custom-table">
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Qty</th>
+          <th>Blood</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let d of donations">
+
+          <td>{{d.id}}</td>
+
+          <td>{{d.donationDate | date:'short'}}</td>
+
+          <td>
+            <span class="qty-badge">{{d.quantity}}</span>
+          </td>
+
+          <td>
+            <span class="blood-badge">{{d.donorDetails.bloodGroup}}</span>
+          </td>
+
+          <td>{{d.donorDetails.age}}</td>
+          <td>{{d.donorDetails.gender}}</td>
+
+          <td>
+            <span class="status-badge" [ngClass]="{
+                'active': d.remarks === 'approved',
+                'inactive': d.remarks !== 'approved'
+              }">
+              {{d.remarks}}
+            </span>
+          </td>
+
+          <td>
+            <button class="btn btn-success btn-sm me-2" [disabled]="d.remarks === 'approved'"
+              (click)="approveDonation(d.id)">
+              Approve
+            </button>
+            <button class="btn-reject">Reject</button>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- EDIT MODAL -->
+  <div class="modal" *ngIf="selectedUser">
+    <div class="modal-content">
+
+      <h5>Edit User</h5>
+
+      <form [formGroup]="editForm" (ngSubmit)="updateUser()">
+
+        <input class="form-control mb-2" formControlName="name">
+        <input class="form-control mb-2" formControlName="email" readonly>
+        <input class="form-control mb-2" formControlName="phone">
+
+        <select class="form-control mb-2" formControlName="role">
+          <option value="ROLE_ADMIN">Admin</option>
+          <option value="ROLE_DONOR">Donor</option>
+          <option value="ROLE_HOSPITAL">Hospital</option>
+        </select>
+
+        <select class="form-control mb-2" formControlName="status">
+          <option value="Active">Active</option>
+          <option value="INACTIVE">Inactive</option>
+        </select>
+
+        <div class="text-end">
+          <button type="button" class="btn btn-cancel me-2" (click)="closeEdit()">Cancel</button>
+          <button class="btn btn-update">Update</button>
+        </div>
+
+      </form>
+
     </div>
-
-    <div class="col-md-6 mb-3">
-      <div class="card action-card">
-        <h5>Blood Stock</h5>
-        <p>Add or update blood inventory</p>
-        <button class="btn btn-outline-danger w-100">Manage Stock</button>
-      </div>
-    </div>
-
   </div>
 
 </div>

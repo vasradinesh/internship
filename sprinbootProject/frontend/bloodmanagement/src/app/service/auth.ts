@@ -18,4 +18,18 @@ export class Auth {
     responseType: 'text'
   });
   }
+
+  forgotPassword(email: string) {
+  return this.http.get(`http://localhost:8080/auth/forget-password/${email}`);
+}
+
+verifyOtp(data: any) {
+  return this.http.post(`http://localhost:8080/auth/verifyotp`, data);
+}
+
+resetPassword(data: any) {
+  return this.http.post(`${this.baseUrl}/resetPassword`, data, {
+    responseType: 'text' // 🔥 IMPORTANT
+  });
+}
 }

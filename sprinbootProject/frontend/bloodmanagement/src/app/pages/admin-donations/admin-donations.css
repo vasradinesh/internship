@@ -1,0 +1,94 @@
+/* PAGE */
+.donation-container {
+  margin-top: 80px;
+  padding: 20px;
+  background: #eef2f7;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.donation-header {
+  margin-bottom: 20px;
+}
+
+.donation-header h3 {
+  color: #1f3b57;
+  font-weight: 700;
+}
+
+.donation-header p {
+  color: #666;
+}
+
+/* CARD */
+.table-card {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+/* TABLE */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table thead {
+  background: #1f3b57;
+  color: white;
+}
+
+.custom-table th {
+  padding: 12px;
+  font-weight: 500;
+}
+
+.custom-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+/* ROW HOVER */
+.custom-table tbody tr:hover {
+  background: #f9fbfd;
+}
+
+/* BADGES */
+.blood-badge {
+  background: #e63946;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.qty-badge {
+  background: #3498db;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+/* STATUS */
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 13px;
+}
+
+.status-badge.approved {
+  background: #2ecc71;
+}
+
+.status-badge.pending {
+  background: #f39c12;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .custom-table {
+    font-size: 12px;
+  }
+}

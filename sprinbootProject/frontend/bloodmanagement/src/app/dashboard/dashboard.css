@@ -1,0 +1,70 @@
+.dashboard-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #f5f7fa, #e4ecf7);
+}
+
+/* CARD */
+.dashboard-card {
+  width: 400px;
+  padding: 30px;
+  border-radius: 15px;
+  background: white;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* TITLE */
+.dashboard-card h2 {
+  color: #C91C1C;
+  margin-bottom: 20px;
+}
+
+/* USER INFO */
+.user-info {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  margin-bottom: 15px;
+}
+
+.info-item label {
+  font-size: 14px;
+  color: #888;
+}
+
+.info-item p {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* ROLE STYLE */
+.role {
+  color: #2A5C82;
+  font-weight: bold;
+}
+
+/* LOGOUT BUTTON */
+.btn-logout {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+
+  background: #C91C1C;
+  color: white;
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.btn-logout:hover {
+  background: #a31515;
+}

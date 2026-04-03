@@ -1,0 +1,90 @@
+/* PAGE BACKGROUND */
+.home-container {
+  margin-top: 70px;
+  min-height: 100vh;
+
+  /* 🔥 subtle background */
+  background: linear-gradient(120deg, #f4f7f9, #e9eef3);
+}
+
+/* HERO */
+.hero-section {
+  height: 65vh; /* 🔥 reduced height */
+  padding: 20px;
+
+  background: radial-gradient(circle at top right, #ffffff, #dfe9f3);
+  color: #1e2a38;
+}
+
+.hero-section h1 {
+  font-size: 38px;
+  font-weight: 700;
+}
+
+.hero-section p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* BUTTONS */
+.btn-danger {
+  background: linear-gradient(135deg, #C91C1C, #a31515);
+  border: none;
+}
+
+.btn-outline-dark {
+  border: 2px solid #333;
+}
+
+.btn-outline-dark:hover {
+  background: #333;
+  color: white;
+}
+
+/* INFO SECTION */
+.info-section {
+  margin-top: -60px; /* 🔥 pull cards up */
+  margin-bottom: 20px;
+}
+
+/* INFO CARD */
+.info-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+
+  /* 🔥 realistic shadow */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+  transition: all 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+.info-card h5 {
+  color: #2A5C82;
+  font-weight: 600;
+}
+
+.info-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* CTA */
+.cta-section {
+  padding: 30px 10px; /* 🔥 reduced gap */
+}
+
+.cta-section h3 {
+  color: #2A5C82;
+  font-weight: 700;
+}
+
+.cta-section p {
+  color: #666;
+  margin-bottom: 10px;
+}

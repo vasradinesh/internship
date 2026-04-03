@@ -21,17 +21,41 @@ export class Mystorage {
     localStorage.clear();
   }
 
+  getUserEmail(): string | null {
+  return this.getitem('email');
+}
+
+getUserDetails() {
+  const token = this.getitem('token');
+  if (!token) return null;
+
+  const payload = JSON.parse(atob(token.split('.')[1]));
+
+  return {
+    email: payload.sub,    
+    role: payload.roles ? payload.roles[0] : payload.role
+  };
+}
+isTokenExpired(token: string): boolean {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const now = Math.floor(new Date().getTime() / 1000);
+      return payload.exp < now; // true if expired
+    } catch (e) {
+      return true; // invalid token as expired
+    }
+  }
+
 
   getUserRole(): string | null {
 
-  const token = this.getitem('token'); // ✅ your key
+  const token = this.getitem('token');
 
   if (!token) return null;
 
   try {
     const payload: any = JSON.parse(atob(token.split('.')[1]));
 
-    // 🔥 handle different backend formats
     if (payload.roles) {
       return payload.roles[0];   // ["ROLE_ADMIN"]
     }

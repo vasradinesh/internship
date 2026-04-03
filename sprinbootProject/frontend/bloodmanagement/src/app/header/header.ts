@@ -14,14 +14,13 @@ export class Header {
   private router = inject(Router);
   private storage = inject(Mystorage)
 
-  // 🔐 check login
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 
   // 🚪 logout
   logout() {
-    this.storage.removeitem('token');
-    this.router.navigate(['/login']);
+    this.storage.removeAllItem();
+    this.router.navigate(['/']);
   }
 }
