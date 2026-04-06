@@ -71,7 +71,7 @@ public class DonorDetailsServiceImpl implements DonorDetailsService {
 
         donorDetailsProxy.setLastDonationDate(LocalDateTime.now());
 
-        Users user = restTemplate.getForObject("http://localhost:9090/auth/get-user/" + donorDetailsProxy.getUserid(), Users.class);
+        Users user = restTemplate.getForObject("http://SERVICEAUTH/auth/get-user/" + donorDetailsProxy.getUserid(), Users.class);
 
         Optional<DonorDetails> byUser = donorDetailsrepo.findByUserid(user.getId());
 
