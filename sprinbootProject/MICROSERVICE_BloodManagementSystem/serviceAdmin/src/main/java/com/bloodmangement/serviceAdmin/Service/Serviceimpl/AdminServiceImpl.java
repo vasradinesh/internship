@@ -44,12 +44,12 @@ public class AdminServiceImpl implements AdminService {
         tokenRole.setToken(token);
         tokenRole.setRole("ROLE_ADMIN");
 
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
+        if(!restTemplate.postForObject("http://SERVICEAUTH/auth/verify-token",tokenRole,Boolean.class)){
             throw new RuntimeException("token is not valid");
         }
 
         List<UsersProxy> usersList = restTemplate.exchange(
-                "http://localhost:9090/gateway/auth/get-all-users",
+                "http://SERVICEAUTH/auth/get-all-users",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<UsersProxy>>() {
@@ -78,16 +78,16 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public String donorApprover(Long id,String token) {
 
-        TokenRole tokenRole = new TokenRole();
-        tokenRole.setToken(token);
-        tokenRole.setRole("ROLE_ADMIN");
+//        TokenRole tokenRole = new TokenRole();
+//        tokenRole.setToken(token);
+//        tokenRole.setRole("ROLE_ADMIN");
+//
+//        if(!restTemplate.postForObject("http://SERVICEAUTH/auth/verify-token",tokenRole,Boolean.class)){
+//            throw new RuntimeException("token is not valid");
+//        }
 
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
-            throw new RuntimeException("token is not valid");
-        }
 
-
-        DonationProxy donation = restTemplate.getForObject("http://localhost:9090/gateway/donor/get-donation/" + id, DonationProxy.class);
+        DonationProxy donation = restTemplate.getForObject("http://SERVICEDONOR/donor/get-donation/" + id, DonationProxy.class);
 
         if (donation!=null){
             if(Objects.equals(donation.getRemarks(), "approved")){
@@ -97,7 +97,7 @@ public class AdminServiceImpl implements AdminService {
             donation.setRemarks("approved");
             donation.setId(donation.getId());
 
-            String s = restTemplate.postForObject("http://localhost:9090/gateway/donor/save-donation", donation, String.class);
+            String s = restTemplate.postForObject("http://SERVICEDONOR/donor/save-donation", donation, String.class);
 
             System.out.println(s);
 
@@ -127,14 +127,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public String bloodStockAddOrUpdate(BloodStockProxy bloodStockProxy,String token) {
-
-        TokenRole tokenRole = new TokenRole();
-        tokenRole.setToken(token);
-        tokenRole.setRole("ROLE_ADMIN");
-
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
-            throw new RuntimeException("token is not valid");
-        }
+//
+//        TokenRole tokenRole = new TokenRole();
+//        tokenRole.setToken(token);
+//        tokenRole.setRole("ROLE_ADMIN");
+//
+//        if(!restTemplate.postForObject("http://auth/verify-token",tokenRole,Boolean.class)){
+//            throw new RuntimeException("token is not valid");
+//        }
 
         Optional<BloodStock> byBloodGroup =
                 bloodStockrepo.findByBloodGroup(bloodStockProxy.getBloodGroup());
@@ -171,11 +171,11 @@ public class AdminServiceImpl implements AdminService {
         tokenRole.setRole("ROLE_ADMIN");
 
 
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
+        if(!restTemplate.postForObject("http://SERVICEAUTH/auth/verify-token",tokenRole,Boolean.class)){
             throw new RuntimeException("token is not valid");
         }
 
-        BloodRequestProxy bloodRequest1 = restTemplate.getForObject("http://localhost:9090/gateway/hospital/get-bloodrequest/" + id, BloodRequestProxy.class);
+        BloodRequestProxy bloodRequest1 = restTemplate.getForObject("http://SERVICEHOSPITAL/hospital/get-bloodrequest/" + id, BloodRequestProxy.class);
 
         if (bloodRequest1!=null){
 
@@ -204,7 +204,7 @@ public class AdminServiceImpl implements AdminService {
 
                     bloodRequest1.setStatus("approved");
 
-                    String s = restTemplate.postForObject("http://localhost:9090/gateway/hospital/set-approved", bloodRequest1, String.class);
+                    String s = restTemplate.postForObject("http://SERVICEHOSPITAL/hospital/set-approved", bloodRequest1, String.class);
                     return "request approved";
                 }else {
                     throw new NoBloodFoundException("blood stock have less quantity than your request quantity",HttpStatus.BAD_REQUEST.toString());

@@ -56,7 +56,7 @@ public class AdminController {
 
 
 //
-    @GetMapping("/donor-approve/{id}")
+    @GetMapping("/don-approve/{id}")
     public ResponseEntity<String> donorApprover(@PathVariable Long id,HttpServletRequest request){
         String authtoken = request.getHeader("Authorization");
         return new ResponseEntity<>(adminService.donorApprover(id,authtoken),HttpStatus.ACCEPTED);
