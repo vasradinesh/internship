@@ -42,18 +42,18 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public String saveHospital(HospitalProxy hospitalProxy,String token) {
 
-        TokenRole tokenRole = new TokenRole();
-        tokenRole.setToken(token);
-        tokenRole.setRole("ROLE_HOSPITAL");
-
-        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
-            throw new RuntimeException("token is not valid");
-        }
+//        TokenRole tokenRole = new TokenRole();
+//        tokenRole.setToken(token);
+//        tokenRole.setRole("ROLE_HOSPITAL");
+//
+//        if(!restTemplate.postForObject("http://localhost:9090/gateway/auth/verify-token",tokenRole,Boolean.class)){
+//            throw new RuntimeException("token is not valid");
+//        }
 
 
         Long id = hospitalProxy.getUserid();
 
-        Users user = restTemplate.getForObject("http://localhost:9090/auth/get-user/" + id, Users.class);
+        Users user = restTemplate.getForObject("http://SERVICEAUTH/auth/get-user/" + id, Users.class);
         if (user!=null){
 
             if (!user.getRole().equals("ROLE_HOSPITAL")){
@@ -69,13 +69,13 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public String bloodRequest(BloodRequestProxy bloodRequestProxy,String token) {
 
-        TokenRole tokenRole = new TokenRole();
-        tokenRole.setToken(token);
-        tokenRole.setRole("ROLE_HOSPITAL");
-
-        if(!restTemplate.postForObject("http://localhost:9090/auth/verify-token",tokenRole,Boolean.class)){
-            throw new RuntimeException("token is not valid");
-        }
+//        TokenRole tokenRole = new TokenRole();
+//        tokenRole.setToken(token);
+//        tokenRole.setRole("ROLE_HOSPITAL");
+//
+//        if(!restTemplate.postForObject("http://localhost:9090/auth/verify-token",tokenRole,Boolean.class)){
+//            throw new RuntimeException("token is not valid");
+//        }
 
         Long hospitalid = bloodRequestProxy.getHospital().getId();
         Optional<Hospital> byId = hospitalrepo.findById(hospitalid);
@@ -83,7 +83,7 @@ public class HospitalServiceImpl implements HospitalService {
         String reqBloodGroup = bloodRequestProxy.getBloodGroup();
         Double reqQuantity = bloodRequestProxy.getQuantity();
 
-        BloodStockProxy bloodStock = restTemplate.getForObject("http://localhost:9090/admin/get-bloodstock/" + reqBloodGroup, BloodStockProxy.class);
+        BloodStockProxy bloodStock = restTemplate.getForObject("http://SERVICEADMIN/admin/get-bloodstock/" + reqBloodGroup, BloodStockProxy.class);
 
 
             if(!(bloodStock.getUnitsAvailable()>=reqQuantity)){
@@ -104,14 +104,14 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public List<BloodRequestHistory> getBloodRequestHistory(String token) {
-
-        TokenRole tokenRole = new TokenRole();
-        tokenRole.setToken(token);
-        tokenRole.setRole("ROLE_HOSPITAL");
-
-        if(!restTemplate.postForObject("http://localhost:9090/auth/verify-token",tokenRole,Boolean.class)){
-            throw new RuntimeException("token is not valid");
-        }
+//
+//        TokenRole tokenRole = new TokenRole();
+//        tokenRole.setToken(token);
+//        tokenRole.setRole("ROLE_HOSPITAL");
+//
+//        if(!restTemplate.postForObject("http://localhost:9090/auth/verify-token",tokenRole,Boolean.class)){
+//            throw new RuntimeException("token is not valid");
+//        }
 
         List<BloodRequestProxy> list = bloodRequestrepo.findAll().stream()
                 .map(m -> mapper.mapper(m, BloodRequestProxy.class)).toList();
