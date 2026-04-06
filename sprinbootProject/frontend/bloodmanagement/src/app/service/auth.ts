@@ -20,16 +20,16 @@ export class Auth {
   }
 
   forgotPassword(email: string) {
-  return this.http.get(`http://localhost:8080/auth/forget-password/${email}`);
+  return this.http.get(`${this.baseUrl}/${email}`);
 }
 
 verifyOtp(data: any) {
-  return this.http.post(`http://localhost:8080/auth/verifyotp`, data);
+  return this.http.post(`${this.baseUrl}/verifyotp`, data);
 }
 
 resetPassword(data: any) {
   return this.http.post(`${this.baseUrl}/resetPassword`, data, {
-    responseType: 'text' // 🔥 IMPORTANT
+    responseType: 'text' 
   });
 }
 }

@@ -22,13 +22,13 @@ export class Register {
     password: ['', [Validators.required, Validators.minLength(5)]],
     phone: [''],
     role: ['', Validators.required],
-    status: ['ACTIVE']
+    status: ['INACTIVE']
   });
 
   register() {
 
     if (this.registerForm.invalid) {
-      alert("Fill all fields ❌");
+      alert("Fill all fields");
       return;
     }
 

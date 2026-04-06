@@ -20,6 +20,7 @@ export class AdminDashboard implements OnInit {
   donations: any[] = [];
   users: any[] = [];
   selectedUser: any = null;
+  
 
   editForm = this.fb.group({
     name: [''],
@@ -35,9 +36,9 @@ export class AdminDashboard implements OnInit {
 
   ngOnInit() {}
 
-  // ✅ LOAD USERS
+  //LOAD USERS
   loadUsers() {
-    this.activeView = 'users'; // 👈 show users only
+    this.activeView = 'users'; // show users only
 
     this.adminService.getAllUsers().subscribe({
       next: (res) => {
@@ -50,9 +51,9 @@ export class AdminDashboard implements OnInit {
     });
   }
 
-  // ✅ LOAD DONATIONS
+  //LOAD DONATIONS
   loadDonations() {
-    this.activeView = 'donations'; // 👈 show donation only
+    this.activeView = 'donations'; // show donation only
 
     this.adminService.getAllDonations().subscribe({
       next: (res) => {
@@ -62,14 +63,15 @@ export class AdminDashboard implements OnInit {
     });
   }
 
-  // ✅ APPROVE DONATION
+
+  // APPROVE DONATION
   approveDonation(id: number) {
     this.adminService.approveDonation(id).subscribe({
       next: () => {
-        alert("Approved ✅");
+        alert("Approved");
         this.loadDonations(); // refresh
       },
-      error: () => alert("Already approved ❌")
+      error: () => alert("Already approved")
     });
   }
 
@@ -104,13 +106,13 @@ export class AdminDashboard implements OnInit {
 
   this.adminService.updateUser(email, payload).subscribe({
     next: () => {
-      alert("User Updated ✅");
+      alert("User Updated ");
       this.closeEdit();
       this.loadUsers();
     },
     error: (err) => {
       console.error(err);
-      alert("Update Failed ❌");
+      alert("Update Failed");
     }
   });
 }
@@ -151,7 +153,7 @@ downloadRequestExcel() {
   });
 }
 
-// ✅ DELETE USER
+// DELETE USER
 deleteUser(email: string) {
 
 
@@ -160,7 +162,7 @@ deleteUser(email: string) {
 
   this.adminService.deleteUser(email).subscribe({
     next: () => {
-      alert("User Deleted ✅");
+      alert("User Deleted ");
 
       // remove from UI instantly 
       this.users = this.users.filter(u => u.email !== email);
@@ -170,7 +172,7 @@ deleteUser(email: string) {
       this.donors = this.users.filter(u => u.role === 'ROLE_DONOR').length;
       this.hospitals = this.users.filter(u => u.role === 'ROLE_HOSPITAL').length;
     },
-    error: () => alert("Delete Failed ❌")
+    error: () => alert("Delete Failed")
   });
 }
 

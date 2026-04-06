@@ -3,43 +3,42 @@
   <!-- HEADER -->
   <div class="dashboard-header">
     <div>
-      <h2>🩸 Admin Dashboard</h2>
+      <h2> Admin Dashboard</h2>
       <p>System Overview & User Management</p>
+    </div>
+    <div class="row stats-row">
+
+      <div class="col-md-4">
+        <div class="stat-card total clickable" (click)="loadUsers()">
+          <h6>Total Users</h6>
+          <h2>{{totalUsers}}</h2>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="stat-card donor clickable" (click)="loadDonations()">
+          <h6>Donors</h6>
+          <h2>{{donors}}</h2>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="stat-card hospital clickable ">
+          <h6>Hospitals</h6>
+          <h2>{{hospitals}}</h2>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <!-- LOAD BUTTON -->
-  <div class="center-btn">
+  <!-- <div class="center-btn">
     <button class="btn load-btn px-4" (click)="loadUsers()">
       Load Users
     </button>
-  </div>
+  </div> -->
 
-  <!-- STATS -->
-  <div class="row stats-row" *ngIf="users.length > 0">
-
-    <div class="col-md-4">
-      <div class="stat-card total clickable" (click)="loadUsers()">
-        <h6>Total Users</h6>
-        <h2>{{totalUsers}}</h2>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="stat-card donor clickable" (click)="loadDonations()">
-        <h6>Donors</h6>
-        <h2>{{donors}}</h2>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="stat-card hospital">
-        <h6>Hospitals</h6>
-        <h2>{{hospitals}}</h2>
-      </div>
-    </div>
-
-  </div>
 
   <div class="download-section mt-4 text-center">
 
@@ -95,7 +94,7 @@
             <button class="btn-edit" (click)="openEdit(user)">
               Edit
             </button>
-            <button  class="btn-delete" (click)="deleteUser(user.email)">
+            <button class="btn-delete" (click)="deleteUser(user.email)">
               Delete
             </button>
           </td>
@@ -117,6 +116,8 @@
       <thead>
         <tr>
           <th>ID</th>
+          <th>Name</th>
+
           <th>Date</th>
           <th>Qty</th>
           <th>Blood</th>
@@ -131,6 +132,7 @@
         <tr *ngFor="let d of donations">
 
           <td>{{d.id}}</td>
+          <td>{{d.donorDetails.user.name}}</td>
 
           <td>{{d.donationDate | date:'short'}}</td>
 

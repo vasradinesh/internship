@@ -1,7 +1,8 @@
 .dashboard-container {
   margin-top: 80px;
   padding: 20px;
-  background: #eef2f7;
+  margin-right: 20px;
+  margin-left: 20px;
   min-height: 100vh;
 }
 
@@ -9,6 +10,7 @@
 .dashboard-header {
   background: #1f3b57;
   color: white;
+  text-align: center;
   padding: 15px 20px;
   border-radius: 12px;
   margin-bottom: 20px;
@@ -28,7 +30,7 @@
 
 /* STATS */
 .stat-card {
-  padding: 20px;
+  padding: 2px;
   border-radius: 15px;
   text-align: center;
   color: white;
@@ -36,15 +38,18 @@
 }
 
 .stat-card.total {
-  background: #2c3e50;
+  background: #ffffff;
+  color: black;
 }
 
 .stat-card.donor {
-  background: #27ae60;
+  background: #c5c5c5;
+  color: black;
 }
 
 .stat-card.hospital {
-  background: #2980b9;
+  background: #ffffff;
+  color: black;
 }
 
 .clickable {
