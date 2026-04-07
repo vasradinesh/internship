@@ -1,0 +1,101 @@
+/* WRAPPER */
+.donate-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: #f5f7fa;
+}
+
+/* CARD */
+.donate-card {
+  width: 420px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.donate-card:hover {
+  transform: translateY(-5px);
+}
+
+/* HEADER */
+.header h3 {
+  margin: 0;
+  color: #8b0000;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+.form-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.form-control:focus {
+  border-color: #8b0000;
+  box-shadow: 0 0 8px rgba(139,0,0,0.2);
+  outline: none;
+}
+
+/* ERROR */
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+/* BUTTON */
+.btn-donate {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: linear-gradient(135deg, #8b0000, #c40000);
+  color: white;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.btn-donate:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(139,0,0,0.3);
+}
+
+.btn-donate:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* INFO BOX */
+.info-box {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #555;
+  background: #f1f8ff;
+  padding: 10px;
+  border-radius: 10px;
+}

@@ -19,6 +19,10 @@ import { ResetPassword } from './reset-password/reset-password';
 import { AdminUsers } from './pages/admin-users/admin-users';
 import { AdminHospitals } from './pages/admin-hospitals/admin-hospitals';
 import { AdminDonations } from './pages/admin-donations/admin-donations';
+import { DonorDashboard } from './donor/donor-dashboard/donor-dashboard';
+import { DonorProfile } from './donor/donor-profile/donor-profile';
+import { DonateBlood } from './donor/donate-blood/donate-blood';
+import { DonationHistory } from './donor/donation-history/donation-history';
 
 
 @NgModule({
@@ -35,7 +39,11 @@ import { AdminDonations } from './pages/admin-donations/admin-donations';
     ResetPassword,
     AdminUsers,
     AdminHospitals,
-    AdminDonations
+    AdminDonations,
+    DonorDashboard,
+    DonorProfile,
+    DonateBlood,
+    DonationHistory
   ],
   imports: [
     BrowserModule,

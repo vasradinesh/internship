@@ -8,28 +8,34 @@
     </div>
     <div class="row stats-row">
 
-      <div class="col-md-4">
-        <div class="stat-card total clickable" (click)="loadUsers()">
-          <h6>Total Users</h6>
-          <h2>{{totalUsers}}</h2>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="stat-card donor clickable" (click)="loadDonations()">
-          <h6>Donors</h6>
-          <h2>{{donors}}</h2>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="stat-card hospital clickable ">
-          <h6>Hospitals</h6>
-          <h2>{{hospitals}}</h2>
-        </div>
-      </div>
-
+  <div class="col-md-3 col-sm-6 mb-3">
+    <div class="stat-card total clickable" (click)="loadUsers()">
+      <h6> Total Users</h6>
+      <!-- <h2>{{totalUsers}}</h2> -->
     </div>
+  </div>
+
+  <div class="col-md-3 col-sm-6 mb-3">
+    <div class="stat-card donor clickable" (click)="loadDonations()">
+      <h6> Donors</h6>
+      <!-- <h2>{{donors}}</h2> -->
+    </div>
+  </div>
+
+  <div class="col-md-3 col-sm-6 mb-3">
+    <div class="stat-card hospital clickable" (click)="loadRequests()">
+      <h6>blood request</h6>
+      <!-- <h2>{{hospitals}}</h2> -->
+    </div>
+  </div>
+
+  <div class="col-md-3 col-sm-6 mb-3">
+    <div class="stat-card donate clickable" (click)="openAddStockModal()">
+      <h6> Add Blood Stock</h6>
+    </div>
+  </div>
+
+</div>
   </div>
 
   <!-- LOAD BUTTON -->
@@ -171,6 +177,63 @@
 
   </div>
 
+  <!-- HOSPITAL REQUEST TABLE -->
+<!-- HOSPITAL REQUEST TABLE -->
+<div class="table-container mt-4" *ngIf="activeView === 'requests'">
+
+  <h4 class="table-title">Hospital Blood Requests</h4>
+
+  <table class="custom-table">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Blood</th>
+        <th>Quantity</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let r of requests">
+
+        <td>{{r.id}}</td>
+
+        <td>
+          <span class="blood-badge">{{r.bloodGroup}}</span>
+        </td>
+
+        <td>
+          <span class="qty-badge">{{r.quantity}}</span>
+        </td>
+
+        <td>
+          <span class="status-badge"
+            [ngClass]="{
+              'active': r.status === 'approved',
+              'inactive': r.status !== 'approved'
+            }">
+            {{r.status}}
+          </span>
+        </td>
+
+        <td>
+          <button class="btn btn-success btn-sm"
+            [disabled]="r.status === 'approved'"
+            (click)="approveRequest(r.id)">
+            Approve
+          </button>
+
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>
+
   <!-- EDIT MODAL -->
   <div class="modal" *ngIf="selectedUser">
     <div class="modal-content">
@@ -184,7 +247,7 @@
         <input class="form-control mb-2" formControlName="phone">
 
         <select class="form-control mb-2" formControlName="role">
-          <option value="ROLE_ADMIN">Admin</option>
+          <option value="ROLE_USER">User</option>
           <option value="ROLE_DONOR">Donor</option>
           <option value="ROLE_HOSPITAL">Hospital</option>
         </select>
@@ -203,5 +266,46 @@
 
     </div>
   </div>
+
+  <!-- ADD BLOOD STOCK MODAL -->
+<div class="modal" *ngIf="showStockModal">
+  <div class="modal-content">
+
+    <h5>Add Blood Stock</h5>
+
+    <form [formGroup]="stockForm" (ngSubmit)="addStock()">
+
+      <select class="form-control mb-2" formControlName="bloodGroup" >
+        <option value="" disabled >Select Blood Group</option>
+        <option>A+</option>
+        <option>A-</option>
+        <option>B+</option>
+        <option>B-</option>
+        <option>AB+</option>
+        <option>AB-</option>
+        <option>O+</option>
+        <option>O-</option>
+      </select>
+
+      <input type="number"
+        class="form-control mb-2"
+        placeholder="Units"
+        formControlName="unitsAvailable">
+
+      <div class="text-end">
+        <button type="button" class="btn btn-cancel me-2"
+          (click)="closeStockModal()">
+          Cancel
+        </button>
+
+        <button class="btn btn-update" type="submit">
+          Add
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
 
 </div>

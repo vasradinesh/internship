@@ -1,0 +1,39 @@
+<div class="donate-wrapper">
+
+  <div class="donate-card">
+
+    <div class="header">
+      <h3>🩸 Donate Blood</h3>
+      <p class="subtitle">Help save lives by donating blood</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="donate()">
+
+      <div class="form-group">
+        <label>Quantity (Units)</label>
+
+        <input type="number"
+          class="form-control"
+          placeholder="Enter quantity (e.g. 1 unit)"
+          formControlName="quantity">
+
+        <!-- VALIDATION -->
+        <small class="error" *ngIf="form.get('quantity')?.touched && form.get('quantity')?.invalid">
+          Enter valid quantity ❌
+        </small>
+      </div>
+
+      <button class="btn-donate" type="submit" [disabled]="form.invalid">
+         Donate Now
+      </button>
+
+    </form>
+
+    <!-- INFO BOX -->
+    <div class="info-box">
+      <p>💡 1 unit ≈ 450ml blood</p>
+    </div>
+
+  </div>
+
+</div>

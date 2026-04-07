@@ -13,6 +13,10 @@ import { ResetPassword } from './reset-password/reset-password';
 import { AdminUsers } from './pages/admin-users/admin-users';
 import { AdminDonations } from './pages/admin-donations/admin-donations';
 import { AdminHospitals } from './pages/admin-hospitals/admin-hospitals';
+import { DonorDashboard } from './donor/donor-dashboard/donor-dashboard';
+import { DonorProfile } from './donor/donor-profile/donor-profile';
+import { DonateBlood } from './donor/donate-blood/donate-blood';
+import { DonationHistory } from './donor/donation-history/donation-history';
 
 const routes: Routes = [
 
@@ -31,24 +35,35 @@ const routes: Routes = [
     canActivate: [AuthGuard, RoleGuard],
     data: { role: 'ROLE_ADMIN' }
   },
-   {
-    path: 'admin/users',
-    component: AdminUsers,
-    canActivate: [AuthGuard, RoleGuard],
-    data: { role: 'ROLE_ADMIN' }
-  },
+
   {
-    path: 'admin/donations',
-    component: AdminDonations,
-    canActivate: [AuthGuard, RoleGuard],
-    data: { role: 'ROLE_ADMIN' }
+    path: 'donor-dashboard',
+    component: DonorDashboard,
+    children: [
+      { path: 'profile', component: DonorProfile },
+      { path: 'donate', component: DonateBlood },
+      { path: 'history', component: DonationHistory },
+      { path: '', redirectTo: 'profile', pathMatch: 'full' }
+    ]
   },
-  {
-    path: 'admin/hospitals',
-    component: AdminHospitals,
-    canActivate: [AuthGuard, RoleGuard],
-    data: { role: 'ROLE_ADMIN' }
-  },
+  //  {
+  //   path: 'admin/users',
+  //   component: AdminUsers,
+  //   canActivate: [AuthGuard, RoleGuard],
+  //   data: { role: 'ROLE_ADMIN' }
+  // },
+  // {
+  //   path: 'admin/donations',
+  //   component: AdminDonations,
+  //   canActivate: [AuthGuard, RoleGuard],
+  //   data: { role: 'ROLE_ADMIN' }
+  // },
+  // {
+  //   path: 'admin/hospitals',
+  //   component: AdminHospitals,
+  //   canActivate: [AuthGuard, RoleGuard],
+  //   data: { role: 'ROLE_ADMIN' }
+  // },
   { path: '**', redirectTo: '' }
 
 ];

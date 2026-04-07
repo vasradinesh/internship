@@ -1,0 +1,74 @@
+/* WRAPPER */
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* CARD */
+.profile-card {
+  width: 420px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 50px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* TITLE */
+.profile-card h3 {
+  text-align: center;
+  color: #8b0000;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+/* INPUT */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+}
+
+.form-control:focus {
+  border-color: #8b0000;
+  outline: none;
+  box-shadow: 0 0 6px rgba(139,0,0,0.3);
+}
+
+/* BUTTON */
+.btn-save {
+  width: 100%;
+  padding: 12px;
+  background: #8b0000;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-save:hover {
+  background: #b30000;
+  transform: translateY(-2px);
+}

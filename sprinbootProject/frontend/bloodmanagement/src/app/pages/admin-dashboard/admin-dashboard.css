@@ -31,14 +31,14 @@
 /* STATS */
 .stat-card {
   padding: 2px;
-  border-radius: 15px;
+  border-radius: 9px;
   text-align: center;
   color: white;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .stat-card.total {
-  background: #ffffff;
+  background: #c5c5c5;
   color: black;
 }
 
@@ -48,7 +48,12 @@
 }
 
 .stat-card.hospital {
-  background: #ffffff;
+  background: #c5c5c5;
+  color: black;
+}
+
+.stat-card.donate {
+  background: #c5c5c5;
   color: black;
 }
 

@@ -1,0 +1,55 @@
+<div class="profile-wrapper">
+
+  <div class="profile-card">
+
+    <h3>👤 My Profile</h3>
+    <p class="subtitle">Manage your donor information</p>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+
+      <div class="form-group">
+        <label>Blood Group</label>
+        <input class="form-control"
+          placeholder="Enter blood group (A+, O-, etc)"
+          formControlName="bloodGroup">
+      </div>
+
+      <div class="form-group">
+        <label>Age</label>
+        <input class="form-control"
+          type="number"
+          placeholder="Enter age"
+          formControlName="age">
+      </div>
+
+      <div class="form-group">
+        <label>Gender</label>
+        <input class="form-control"
+          placeholder="Enter gender"
+          formControlName="gender">
+      </div>
+
+      <div class="form-group">
+        <label>City</label>
+        <input class="form-control"
+          placeholder="Enter city"
+          formControlName="city">
+      </div>
+
+      <div class="form-group">
+        <label>Availability</label>
+        <select class="form-control" formControlName="available">
+          <option value="yes">Available</option>
+          <option value="no">Not Available</option>
+        </select>
+      </div>
+
+      <button class="btn-save" type="submit">
+        Save Profile
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

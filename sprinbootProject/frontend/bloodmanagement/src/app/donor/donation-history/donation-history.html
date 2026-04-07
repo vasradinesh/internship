@@ -1,0 +1,64 @@
+<div class="history-container">
+
+  <div class="history-card">
+
+    <div class="header">
+      <h3>🩸 Donation History</h3>
+      <p>Your past donation records</p>
+    </div>
+
+    <div class="table-wrapper">
+
+      <table class="custom-table">
+
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Quantity</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let h of history">
+
+            <td>{{h.id}}</td>
+
+            <td>
+              {{h.donationDate | date:'medium'}}
+            </td>
+
+            <td>
+              <span class="qty-badge">
+                {{h.quantity}} ml
+              </span>
+            </td>
+
+            <td>
+              <span class="status-badge"
+                [ngClass]="{
+                  'approved': h.remarks === 'approved',
+                  'pending': h.remarks !== 'approved'
+                }">
+
+                {{h.remarks}}
+              </span>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+      <!-- EMPTY STATE -->
+      <div *ngIf="history.length === 0" class="empty-state">
+        No donation history found ❌
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
