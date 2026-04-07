@@ -1,6 +1,7 @@
 package com.springboot.BloodManagementSystem.Controller;
 
 
+import com.springboot.BloodManagementSystem.Proxy.BloodRequestProxy;
 import com.springboot.BloodManagementSystem.Proxy.BloodStockProxy;
 import com.springboot.BloodManagementSystem.Proxy.DonationProxy;
 import com.springboot.BloodManagementSystem.Proxy.UsersProxy;
@@ -58,6 +59,11 @@ public class AdminController {
     @GetMapping("/bloodrequest/approve/{id}")
     public ResponseEntity<String> bloodRequestApprove(@PathVariable Long id){
         return new ResponseEntity<>(adminService.bloodRequestapprover(id),HttpStatus.OK);
+    }
+
+    @GetMapping("get-all-bloodrequest")
+    public ResponseEntity<List<BloodRequestProxy>> getAllBloodRequest(){
+        return new ResponseEntity<>(adminService.getAllBloodRequest(),HttpStatus.OK);
     }
 
 

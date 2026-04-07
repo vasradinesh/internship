@@ -1,5 +1,6 @@
 package com.springboot.BloodManagementSystem.Service;
 
+import com.springboot.BloodManagementSystem.Proxy.BloodRequestProxy;
 import com.springboot.BloodManagementSystem.Proxy.BloodStockProxy;
 import com.springboot.BloodManagementSystem.Proxy.DonationProxy;
 import com.springboot.BloodManagementSystem.Proxy.UsersProxy;
@@ -23,4 +24,6 @@ public interface AdminService {
     String deleteuserbyemail(String email);
 
     List<DonationProxy> getAllDonation();
+
+    List<BloodRequestProxy> getAllBloodRequest();
 }

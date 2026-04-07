@@ -6,6 +6,7 @@ import com.springboot.BloodManagementSystem.Domain.BloodRequest;
 import com.springboot.BloodManagementSystem.Domain.BloodStock;
 import com.springboot.BloodManagementSystem.Domain.Donation;
 import com.springboot.BloodManagementSystem.Domain.Users;
+import com.springboot.BloodManagementSystem.Proxy.BloodRequestProxy;
 import com.springboot.BloodManagementSystem.Proxy.BloodStockProxy;
 import com.springboot.BloodManagementSystem.Proxy.DonationProxy;
 import com.springboot.BloodManagementSystem.Proxy.UsersProxy;
@@ -210,5 +211,16 @@ public class AdminServiceImpl implements AdminService {
             throw new NoUserFoundException("there is no users ",HttpStatus.NOT_FOUND.toString());
         }
 
+    }
+
+    @Override
+    public List<BloodRequestProxy> getAllBloodRequest() {
+        List<BloodRequest> bloodRequestList = bloodRequestrepo.findAll();
+        System.out.println(bloodRequestList);
+        if (!bloodRequestList.isEmpty()){
+            return bloodRequestList.stream().map(m->mapper.mapper(m,BloodRequestProxy.class)).toList();
+        }else {
+            throw new NoUserFoundException("there is no users ",HttpStatus.NOT_FOUND.toString());
+        }
     }
 }
